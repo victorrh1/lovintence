@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Código do carrossel existente
     const carousel = document.querySelector('.banner-carousel');
     const slides = carousel.querySelectorAll('.carousel-slide');
     const dots = carousel.querySelectorAll('.dot');
@@ -42,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function startInterval() {
         slideInterval = setInterval(() => {
             goToSlide(currentSlide + 1);
-        }, 5000); // Muda a cada 5 segundos
+        }, 5000);
     }
 
     function resetInterval() {
@@ -50,16 +51,47 @@ document.addEventListener('DOMContentLoaded', function() {
         startInterval();
     }
 
-    // Inicia o autoplay
     startInterval();
 
-    // Pausa o autoplay quando o mouse está sobre o carrossel
     carousel.addEventListener('mouseenter', () => {
         clearInterval(slideInterval);
     });
 
-    // Reinicia o autoplay quando o mouse sai do carrossel
     carousel.addEventListener('mouseleave', () => {
         startInterval();
+    });
+
+    // Controle do Menu Mobile
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileNav = document.getElementById('mobileNav');
+    const body = document.body;
+
+    // Criar overlay
+    const overlay = document.createElement('div');
+    overlay.className = 'menu-overlay';
+    body.appendChild(overlay);
+
+    function toggleMenu() {
+        mobileNav.classList.toggle('active');
+        overlay.classList.toggle('active');
+        body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+    }
+
+    menuToggle.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', toggleMenu);
+
+    // Fechar menu ao clicar em um link
+    const mobileLinks = mobileNav.querySelectorAll('a');
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            toggleMenu();
+        });
+    });
+
+    // Fechar menu ao redimensionar para desktop
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 768 && mobileNav.classList.contains('active')) {
+            toggleMenu();
+        }
     });
 }); 

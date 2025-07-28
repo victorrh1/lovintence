@@ -27,7 +27,7 @@
         <div class="main-header">
             <div class="container">
                 <div class="mobile-menu">
-                    <button class="menu-toggle">
+                    <button class="menu-toggle" id="menuToggle">
                         <i class="fas fa-bars"></i>
                     </button>
                 </div>
@@ -62,6 +62,52 @@
             </div>
         </div>
 
+        <div class="mobile-nav" id="mobileNav">
+            <div class="container">
+                <nav class="mobile-categories">
+                    <h2>Categorias</h2>
+                    <ul class="category-list">
+                        <li>
+                            <a href="#" class="category-item perfumes">
+                                <i class="fas fa-spray-can"></i>
+                                <span>Perfumes</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="category-item corpo">
+                                <i class="fas fa-bath"></i>
+                                <span>Corpo e Banho</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="category-item nacionais">
+                                <i class="fas fa-flag"></i>
+                                <span>Nacionais</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="category-item importados">
+                                <i class="fas fa-globe"></i>
+                                <span>Importados</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="category-item masculinos">
+                                <i class="fas fa-male"></i>
+                                <span>Masculinos</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="category-item ofertas">
+                                <i class="fas fa-percentage"></i>
+                                <span>Ofertas</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
         <nav class="main-nav">
             <div class="container">
                 <ul>
@@ -78,7 +124,8 @@
 
     <main>
         <div class="container main-container">
-            <aside class="sidebar">
+            <!-- Sidebar visível apenas em desktop -->
+            <aside class="sidebar desktop-only">
                 <div class="categories">
                     <h2>Categorias</h2>
                     <ul class="category-list">
