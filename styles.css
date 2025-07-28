@@ -16,6 +16,14 @@
     --spacing-lg: 24px;
     --spacing-xl: 32px;
     --border-radius: 8px;
+
+    /* Cores das categorias */
+    --category-perfumes: #311e28;      /* Rosa */
+    --category-corpo: #311e28;         /* Azul Royal */
+    --category-nacionais: #311e28;     /* Verde Limão */
+    --category-importados: #311e28;    /* Roxo */
+    --category-masculinos: #311e28;    /* Azul Aço */
+    --category-ofertas: #311e28;       /* Laranja */
 }
 
 * {
@@ -251,18 +259,65 @@ body {
     text-decoration: none;
     border-radius: var(--border-radius);
     transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .category-item:hover {
     background: var(--light-gray);
-    color: var(--primary-color);
     transform: translateX(5px);
+}
+
+.category-item:hover i {
+    transform: scale(1.1);
 }
 
 .category-item i {
     width: 24px;
     font-size: 1.2rem;
-    color: var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+/* Cores específicas para cada categoria */
+.category-item.perfumes i {
+    color: var(--category-perfumes);
+}
+.category-item.perfumes:hover {
+    color: var(--category-perfumes);
+}
+
+.category-item.corpo i {
+    color: var(--category-corpo);
+}
+.category-item.corpo:hover {
+    color: var(--category-corpo);
+}
+
+.category-item.nacionais i {
+    color: var(--category-nacionais);
+}
+.category-item.nacionais:hover {
+    color: var(--category-nacionais);
+}
+
+.category-item.importados i {
+    color: var(--category-importados);
+}
+.category-item.importados:hover {
+    color: var(--category-importados);
+}
+
+.category-item.masculinos i {
+    color: var(--category-masculinos);
+}
+.category-item.masculinos:hover {
+    color: var(--category-masculinos);
+}
+
+.category-item.ofertas i {
+    color: var(--category-ofertas);
+}
+.category-item.ofertas:hover {
+    color: var(--category-ofertas);
 }
 
 /* Banner Carrossel */
