@@ -421,7 +421,7 @@ body {
     transition: all 0.3s ease;
 }
 
-/* Cores específicas para cada categoria */
+/* Cores específicas para cada categoria 
 .category-item.perfumes i {
     color: var(--category-perfumes);
 }
@@ -462,6 +462,26 @@ body {
 }
 .category-item.ofertas:hover {
     color: var(--category-ofertas);
+}
+*/
+/* alteração da sidebar para cinza fixo */
+.sidebar .category-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-sm) var(--spacing-md);
+    color: var(--text-color);
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    background: var(--light-gray); /* Adicionar fundo cinza igual ao mobile */
+    transition: all 0.3s ease;
+    cursor: pointer;
+    margin-bottom: var(--spacing-xs); /* Pequeno espaço entre as categorias */
+}
+
+.sidebar .category-item:hover {
+    background: var(--medium-gray); /* Cinza mais escuro no hover */
+    transform: translateX(5px);
 }
 
 /* Banner Carrossel */
