@@ -602,7 +602,7 @@ body {
     flex-direction: column;
     gap: var(--spacing-xl);
 }
-
+/*
 @media (max-width: 768px) {
     .banner-carousel {
         height: 400px;
@@ -625,6 +625,18 @@ body {
         text-align: center;
         flex-direction: column;
     }
+}
+*/
+@media (max-width: 768px) {
+    .banner-carousel {
+        height: 400px;
+    }
+
+    .sidebar {
+        margin-bottom: var(--spacing-md);
+    }
+    
+    /* Remover as regras que interferem com o menu mobile */
 }
 
 /* Categorias */
