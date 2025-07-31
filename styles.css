@@ -768,3 +768,37 @@ footer {
     color: var(--dark-gray);
     font-size: 0.9rem;
 } 
+
+/* Subcategorias */
+.subcategory-list {
+    display: none;
+    margin-top: 5px;
+    margin-left: 30px;
+    padding-left: 0;
+    list-style: none;
+    border-left: none;
+  }
+  
+  .has-subcategory.open > .subcategory-list {
+    display: block;
+  }
+  
+  .arrow {
+    margin-left: auto;
+    font-size: 12px;
+    transition: transform 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  .has-subcategory.open .arrow {
+    transform: rotate(180deg);
+  }
+  
+  /* linhas das subcategorias tirar as linhas*/
+  .subcategory-list a {
+    text-decoration: none;
+    color: inherit; /* opcional: mantém a cor padrão do texto */
+  }
+  
+

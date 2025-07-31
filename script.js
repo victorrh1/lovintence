@@ -20,6 +20,17 @@ document.addEventListener('DOMContentLoaded', function() {
         dots[currentSlide].classList.add('active');
     }
 
+    // Função para abrir e fechar as subcategorias
+        document.querySelectorAll('.has-subcategory > a').forEach(link => {
+          link.addEventListener('click', function (e) {
+            e.preventDefault();
+            const parent = this.parentElement;
+            parent.classList.toggle('open');
+          });
+      });
+      
+      
+
     // Event listeners para os botões
     prevButton.addEventListener('click', () => {
         goToSlide(currentSlide - 1);

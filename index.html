@@ -6,7 +6,7 @@
     <meta name="description" content="Lovintence - Sua loja de perfumes e cosméticos">
     <meta name="theme-color" content="#008000">
     <title>Lovintence</title>
-    <link rel="icon" href="images/rose.ico" type="image/x-icon">
+    <link rel="icon" href="images/iconeaba.ico" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -15,11 +15,13 @@
         <div class="top-bar">
             <div class="container">
                 <a href="https://www.instagram.com/lovintence/" target="_blank" class="instagram-icon">
-                    <i class="fab fa-instagram"></i>
+                    <!--<i class="fab fa-instagram"></i>-->
+                    <img src="svg/instagram.svg" alt="instagram" style="width: 40px; height: 40px; background: white;">
                 </a>
                 <div class="right-links">
                     <a href="https://api.whatsapp.com/message/GSNSWYRLP2XUK1?autoload=1&app_absent=0" target="_blank">
-                        <i class="fab fa-whatsapp"></i> Whatsapp
+                        <!--<i class="fab fa-whatsapp"></i> Whatsapp-->
+                        <img src="svg/whatsapp.svg" alt="whatsapp" style="width: 40px; height: 40px; background: white;">
                     </a>
                 </div>
             </div>
@@ -78,7 +80,7 @@
                             <a href="#" class="category-item corpo">
                                 <i class="fas fa-bath"></i>
                                 <!--<img src="svg/perfume.svg" alt="corpo" style="width: 40px; height: 40px; background: rgb(105, 26, 26);">-->
-                                <span>Corpo e Banho</span>
+                                <span>Cremes</span>
                             </a>
                         </li>
                         <li>
@@ -114,7 +116,7 @@
             <div class="container">
                 <ul>
                     <li><a href="#">Perfumes</a></li>
-                    <li><a href="#">Corpo e Banho</a></li>
+                    <li><a href="#">Cremes</a></li>
                     <li><a href="#">Nacionais</a></li>
                     <li><a href="#">Importados</a></li>
                     <li><a href="#">Masculinos</a></li>
@@ -131,41 +133,73 @@
                 <div class="categories">
                     <h2>Categorias</h2>
                     <ul class="category-list">
-                        <li>
+                        <li class="has-subcategory">
                             <a href="#" class="category-item perfumes">
-                                <i class="fas fa-spray-can"></i>
+                                <!--<i class="fas fa-spray-can"></i>-->
+                                <img src="svg/perfumecategoria.svg" alt="corpo" style="width: 40px; height: 40px; background: white;">
                                 <span>Perfumes</span>
+                                <span class="arrow">&#9660;</span>
+                            </a>
+                            <ul class="subcategory-list">
+                                <li><a href="perfume-masculino-i/importados-m.html" target="_blank">Importado Masculino</a></li>
+                                <li><a href="perfume-feminino-i/importados-f.html" target="_blank">Importado Feminino</a></li>
+                                <li><a href="perfume-capilar/perfume-capilar.html" target="_blank">Perfume Capilar</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-subcategory">
+                            <a href="#" class="category-item cremes">
+                                <!--<i class="fas fa-bath"></i>-->
+                                <img src="svg/cremecategoria.svg" alt="corpo" style="width: 40px; height: 40px; background: white;">
+                                <span>Cremes</span>
+                                <span class="arrow">&#9660;</span>
+                            </a>
+                            <ul class="subcategory-list">
+                                <li><a href="hidratantes.m/masculino.html" target="_blank">Hidratantes Masculino</a></li>
+                                <li><a href="hidratantes.f/feminino.html" target="_blank">Hidratantes Feminino</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-subcategory">
+                            <a href="#" class="category-item sabonetes">
+                                <!--<i class="fas fa-male"></i>-->
+                                <img src="svg/sabonetecategoria.svg" alt="corpo" style="width: 40px; height: 40px; background: white;">
+                                <span>Sabonetes</span>
+                                <span class="arrow">&#9660;</span>
+                            </a>
+                            <ul class="subcategory-list">
+                                <li><a href="sabonetes.m/masculino.html" target="_blank">Sabonete Masculino</a></li>
+                                <li><a href="sabonetes.f/feminino.html" target="_blank">Sabonete Feminino</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-subcategory">
+                            <a href="#" class="category-item kits">
+                                <!--<i class="fas fa-male"></i>-->
+                                <img src="svg/kit.svg" alt="corpo" style="width: 40px; height: 40px; background: white;">
+                                <span>Kits</span>
+                                <span class="arrow">&#9660;</span>
+                            </a>
+                            <ul class="subcategory-list">
+                                <li><a href="kits.m/masculino.html" target="_blank">Kits Masculinos</a></li>
+                                <li><a href="kits.f/feminino.html" target="_blank">Kits Femininos</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" class="category-item encomendar">
+                                <img src="svg/encomendar.svg" alt="corpo" style="width: 40px; height: 40px; background: white;">
+                                <span>Encomendar</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="category-item corpo">
-                                <i class="fas fa-bath"></i>
-                                <!--<img src="svg/perfume.svg" alt="corpo" style="width: 40px; height: 40px; background: white;">-->
-                                <span>Corpo e Banho</span>
+                            <a href="#" class="category-item feedbacks">
+                                <!--<i class="fas fa-percentage"></i>-->
+                                <img src="svg/feedbacks.svg" alt="corpo" style="width: 40px; height: 40px; background: white;">
+                                <span>Feedbacks</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="category-item nacionais">
-                                <i class="fas fa-flag"></i>
-                                <span>Nacionais</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="category-item importados">
-                                <i class="fas fa-globe"></i>
-                                <span>Importados</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="category-item masculinos">
-                                <i class="fas fa-male"></i>
-                                <span>Masculinos</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="category-item ofertas">
-                                <i class="fas fa-percentage"></i>
-                                <span>Ofertas</span>
+                            <a href="#" class="category-item sobre-mim">
+                                <!--<i class="fas fa-percentage"></i>-->
+                                <img src="svg/sobremim.svg" alt="corpo" style="width: 40px; height: 40px; background: white;">
+                                <span>Sobre mim</span>
                             </a>
                         </li>
                     </ul>
@@ -182,7 +216,7 @@
                             <img src="images/AZAR.jpeg" alt="Banner 2" class="banner-image">
                         </div>
                         <div class="carousel-slide">
-                            <img src="images/GARO.jpeg" alt="Banner 3" class="banner-image">
+                            <img src="images/bleucha.jpeg" alt="Banner 3" class="banner-image">
                         </div>
                     </div>
                     <button class="carousel-button prev">
@@ -214,7 +248,7 @@
                                 </button>
                             </div>
                             <div class="product-info">
-                                <h3>MILAO</h3>
+                                <h3>Milão</h3>
                                 <div class="price-container">
                                     <P class="old-price">R$ 150,00</P>
                                     <p class="price">R$ 119,99</p>
@@ -232,7 +266,7 @@
                                 </button>
                             </div>
                             <div class="product-info">
-                                <h3>AZARTAFA</h3>
+                                <h3>Azartafa</h3>
                                 <div class="price-container">
                                     <p class="old-price">R$ 149,00</p>
                                     <p class="price">R$ 129,99</p>
@@ -243,14 +277,14 @@
                         <div class="product-card">
                             <div class="product-image">
                                 <span class="discount">45% OFF</span>
-                                <img src="images/GARO.jpeg" alt="Perfume 222">
+                                <img src="images/bleucha.jpeg" alt="Perfume 222">
                                 <button class="quick-add">
                                     <i class="fas fa-shopping-cart"></i>
                                     Adicionar
                                 </button>
                             </div>
                             <div class="product-info">
-                                <h3>GAROTA</h3>
+                                <h3>Bleucha</h3>
                                 <div class="price-container">
                                     <p class="old-price">R$ 105,00</p>
                                     <p class="price">R$ 99,90</p>
@@ -286,16 +320,18 @@
                     <h3>Redes Sociais</h3>
                     <div class="social-links">
                         <a href="https://www.instagram.com/lovintence/" target="_blank">
-                            <i class="fab fa-instagram"></i>
+                            <!--<i class="fab fa-instagram"></i>-->
+                            <img src="svg/redeinsta.svg" alt="instagram" style="width: 40px; height: 40px; background: white;">
                         </a>
                         <a href="https://api.whatsapp.com/message/GSNSWYRLP2XUK1?autoload=1&app_absent=0" target="_blank">
-                            <i class="fab fa-whatsapp"></i>
+                            <!--<i class="fab fa-whatsapp"></i>-->
+                            <img src="svg/redewhats.svg" alt="whatsapp" style="width: 40px; height: 40px; background: white;">
                         </a>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 Lovintence. Todos os direitos reservados.</p>
+                <p>&copy; 2025 Lovintence. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>
