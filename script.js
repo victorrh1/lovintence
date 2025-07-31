@@ -21,15 +21,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Função para abrir e fechar as subcategorias
-        document.querySelectorAll('.has-subcategory > a').forEach(link => {
-          link.addEventListener('click', function (e) {
+    document.querySelectorAll('.has-subcategory > a').forEach(link => {
+        link.addEventListener('click', function (e) {
             e.preventDefault();
             const parent = this.parentElement;
             parent.classList.toggle('open');
-          });
-      });
-      
-      
+        });
+    });
 
     // Event listeners para os botões
     prevButton.addEventListener('click', () => {
@@ -91,9 +89,18 @@ document.addEventListener('DOMContentLoaded', function() {
     menuToggle.addEventListener('click', toggleMenu);
     overlay.addEventListener('click', toggleMenu);
 
-    // Fechar menu ao clicar em um link
-    const mobileLinks = mobileNav.querySelectorAll('a');
-    mobileLinks.forEach(link => {
+    // CORREÇÃO: Fechar menu apenas ao clicar em links de subcategorias ou categorias sem subcategorias
+    // Links de subcategorias (dentro de .subcategory-list)
+    const subcategoryLinks = mobileNav.querySelectorAll('.subcategory-list a');
+    subcategoryLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            toggleMenu();
+        });
+    });
+
+    // Links de categorias que NÃO possuem subcategorias (não possuem a classe .has-subcategory)
+    const singleCategoryLinks = mobileNav.querySelectorAll('li:not(.has-subcategory) > a');
+    singleCategoryLinks.forEach(link => {
         link.addEventListener('click', () => {
             toggleMenu();
         });
@@ -105,4 +112,4 @@ document.addEventListener('DOMContentLoaded', function() {
             toggleMenu();
         }
     });
-}); 
+});
