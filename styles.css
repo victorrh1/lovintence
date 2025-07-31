@@ -909,13 +909,15 @@ footer {
 }
 
 /* Alternativa mais sutil com pontos */
+/*
 .mobile-nav .subcategory-list li:not(:last-child).dotted-divider::after {
     background: none;
     border-bottom: 1px dotted var(--medium-gray);
     opacity: 0.5;
 }
-
+*/
 /* Alternativa com linha colorida baseada na cor primária do site */
+/*
 .mobile-nav .subcategory-list li:not(:last-child).primary-divider::after {
     background: linear-gradient(
         to right, 
@@ -927,13 +929,13 @@ footer {
     opacity: 0.3;
     height: 2px;
 }
-
-/* Ajustar o espaçamento do último item para não ter margem extra */
+*/
+/* Ajustar o espaçamento do último item para não ter margem extra 
 .mobile-nav .subcategory-list li:last-child {
     margin-bottom: var(--spacing-xs);
 }
 
-/* Versão com ícone decorativo no centro da linha */
+/* Versão com ícone decorativo no centro da linha 
 .mobile-nav .subcategory-list li:not(:last-child).icon-divider::after {
     background: var(--light-gray);
     height: 1px;
@@ -951,8 +953,8 @@ footer {
     padding: 0 var(--spacing-xs);
     z-index: 1;
 }
-
-/* Hover effect para as subcategorias com linha */
+*/
+/* Hover effect para as subcategorias com linha 
 .mobile-nav .subcategory-list a:hover {
     background: var(--light-gray);
     color: var(--primary-color);
@@ -960,13 +962,13 @@ footer {
     border-radius: var(--border-radius);
 }
 
-/* Transição suave para as linhas */
+/* Transição suave para as linhas 
 .mobile-nav .subcategory-list li:not(:last-child)::after {
     transition: all 0.3s ease;
 }
 
-/* Efeito quando a subcategoria está sendo hovereada */
+/* Efeito quando a subcategoria está sendo hovereada 
 .mobile-nav .subcategory-list li:hover::after {
     opacity: 0.8;
     transform: scaleX(1.05);
-}
+}*/
