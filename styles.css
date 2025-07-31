@@ -882,3 +882,91 @@ footer {
     text-decoration: none;
     color: inherit; 
   } */
+
+  /* Adicionar estas regras ao seu CSS para criar linhas divisórias nas subcategorias */
+
+/* Linha divisória entre subcategorias no menu mobile */
+.mobile-nav .subcategory-list li:not(:last-child) {
+    position: relative;
+    margin-bottom: var(--spacing-md);
+}
+
+.mobile-nav .subcategory-list li:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    bottom: calc(-1 * var(--spacing-sm));
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+        to right, 
+        transparent 0%, 
+        var(--medium-gray) 20%, 
+        var(--medium-gray) 80%, 
+        transparent 100%
+    );
+    opacity: 0.6;
+}
+
+/* Alternativa mais sutil com pontos */
+.mobile-nav .subcategory-list li:not(:last-child).dotted-divider::after {
+    background: none;
+    border-bottom: 1px dotted var(--medium-gray);
+    opacity: 0.5;
+}
+
+/* Alternativa com linha colorida baseada na cor primária do site */
+.mobile-nav .subcategory-list li:not(:last-child).primary-divider::after {
+    background: linear-gradient(
+        to right, 
+        transparent 0%, 
+        var(--primary-color) 30%, 
+        var(--primary-color) 70%, 
+        transparent 100%
+    );
+    opacity: 0.3;
+    height: 2px;
+}
+
+/* Ajustar o espaçamento do último item para não ter margem extra */
+.mobile-nav .subcategory-list li:last-child {
+    margin-bottom: var(--spacing-xs);
+}
+
+/* Versão com ícone decorativo no centro da linha */
+.mobile-nav .subcategory-list li:not(:last-child).icon-divider::after {
+    background: var(--light-gray);
+    height: 1px;
+}
+
+.mobile-nav .subcategory-list li:not(:last-child).icon-divider::before {
+    content: '•';
+    position: absolute;
+    bottom: calc(-1 * var(--spacing-sm) - 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--white);
+    color: var(--primary-color);
+    font-size: 12px;
+    padding: 0 var(--spacing-xs);
+    z-index: 1;
+}
+
+/* Hover effect para as subcategorias com linha */
+.mobile-nav .subcategory-list a:hover {
+    background: var(--light-gray);
+    color: var(--primary-color);
+    transform: translateX(5px);
+    border-radius: var(--border-radius);
+}
+
+/* Transição suave para as linhas */
+.mobile-nav .subcategory-list li:not(:last-child)::after {
+    transition: all 0.3s ease;
+}
+
+/* Efeito quando a subcategoria está sendo hovereada */
+.mobile-nav .subcategory-list li:hover::after {
+    opacity: 0.8;
+    transform: scaleX(1.05);
+}
