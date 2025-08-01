@@ -18,12 +18,11 @@
     --border-radius: 8px;
 
     /* Cores das categorias */
-    --category-perfumes: #311e28;      /* Rosa */
-    /* --category-corpo: #311e28;*/         /* Azul Royal */
-    --category-nacionais: #311e28;     /* Verde Limão */
-    --category-importados: #311e28;    /* Roxo */
-    --category-masculinos: #311e28;    /* Azul Aço */
-    --category-ofertas: #311e28;       /* Laranja */
+    --category-perfumes: #311e28;
+    --category-nacionais: #311e28;
+    --category-importados: #311e28;
+    --category-masculinos: #311e28;
+    --category-ofertas: #311e28;
 }
 
 * {
@@ -218,7 +217,7 @@ body {
 }
 
 .main-nav a:hover {
-    color: var(--primary-color);
+    color: #f0f0f0; /* Cinza claro no hover */
 }
 
 @media (min-width: 768px) {
@@ -296,6 +295,8 @@ body {
     width: 24px;
     height: 24px;
     flex-shrink: 0;
+    filter: contrast(2) brightness(1.2) opacity(0.9);
+    mix-blend-mode: multiply;
 }
 
 .mobile-nav .category-item span {
@@ -303,14 +304,13 @@ body {
     text-align: left;
 }
 
-.mobile-nav .arrow {
-    margin-left: auto;
-    font-size: 12px;
-    transition: transform 0.3s ease;
+/* Removendo setas */
+.has-subcategory .arrow {
+    display: none;
 }
 
-.mobile-nav .has-subcategory.open .arrow {
-    transform: rotate(180deg);
+.has-subcategory.open .arrow {
+    display: none;
 }
 
 .mobile-nav .subcategory-list {
@@ -330,7 +330,7 @@ body {
 .mobile-nav .subcategory-list a {
     display: block;
     padding: var(--spacing-sm) var(--spacing-md);
-    color: var(--dark-gray);
+    color: var(--text-color);
     text-decoration: none;
     border-radius: var(--border-radius);
     transition: all 0.3s ease;
@@ -338,15 +338,20 @@ body {
 }
 
 .mobile-nav .subcategory-list a:hover {
-    background: var(--light-gray);
-    color: var(--primary-color);
+    background: #f0f0f0; /* Cinza claro no hover */
+    color: var(--text-color);
     transform: translateX(5px);
 }
 
-.mobile-nav .subcategory-list a {
-    color: var(--text-color);
-    text-decoration: none;
-    padding: var(--spacing-sm) var(--spacing-md);
+.mobile-nav .subcategory-list li:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    bottom: calc(-1 * var(--spacing-sm));
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent 0%, var(--medium-gray) 20%, var(--medium-gray) 80%, transparent 100%);
+    opacity: 0.6;
 }
 
 /* Overlay para quando o menu mobile está aberto */
@@ -388,6 +393,14 @@ body {
     border-radius: var(--border-radius);
     padding: var(--spacing-md);
     height: fit-content;
+    border-right: none; /* Remove o risco vertical */
+}
+
+.sidebar h2 {
+    color: var(--text-color);
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 1px solid var(--medium-gray);
 }
 
 .category-list {
@@ -402,86 +415,78 @@ body {
     color: var(--text-color);
     text-decoration: none;
     border-radius: var(--border-radius);
+    background: var(--light-gray);
     transition: all 0.3s ease;
     cursor: pointer;
+    margin-bottom: var(--spacing-xs);
+    border-bottom: 1px solid #e0e0e0; /* Divisória entre itens */
 }
 
 .category-item:hover {
-    background: var(--light-gray);
+    background: var(--medium-gray);
     transform: translateX(5px);
 }
 
-.category-item:hover i {
-    transform: scale(1.1);
-}
-
-.category-item i {
+.category-item img {
     width: 24px;
-    font-size: 1.2rem;
-    transition: all 0.3s ease;
+    height: 24px;
+    flex-shrink: 0;
+    filter: contrast(2) brightness(1.2) opacity(0.9);
+    mix-blend-mode: multiply;
 }
 
-/* Cores específicas para cada categoria 
-.category-item.perfumes i {
-    color: var(--category-perfumes);
-}
-.category-item.perfumes:hover {
-    color: var(--category-perfumes);
+.category-item span {
+    flex: 1;
+    text-align: left;
 }
 
-.category-item.corpo i {
-    color: var(--category-corpo);
-}
-.category-item.corpo:hover {
-    color: var(--category-corpo);
+/* Removendo setas na sidebar */
+.has-subcategory .arrow {
+    display: none;
 }
 
-.category-item.nacionais i {
-    color: var(--category-nacionais);
-}
-.category-item.nacionais:hover {
-    color: var(--category-nacionais);
+.has-subcategory.open .arrow {
+    display: none;
 }
 
-.category-item.importados i {
-    color: var(--category-importados);
-}
-.category-item.importados:hover {
-    color: var(--category-importados);
-}
-
-.category-item.masculinos i {
-    color: var(--category-masculinos);
-}
-.category-item.masculinos:hover {
-    color: var(--category-masculinos);
+.subcategory-list {
+    display: none;
+    margin-top: 5px;
+    margin-left: 30px;
+    padding-left: 0;
+    list-style: none;
+    border-left: none;
 }
 
-.category-item.ofertas i {
-    color: var(--category-ofertas);
+.has-subcategory.open > .subcategory-list {
+    display: block;
 }
-.category-item.ofertas:hover {
-    color: var(--category-ofertas);
-}
-*/
-/* alteração da sidebar para cinza fixo */
-.sidebar .category-item {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-md);
+
+.subcategory-list a {
+    display: block;
     padding: var(--spacing-sm) var(--spacing-md);
     color: var(--text-color);
     text-decoration: none;
     border-radius: var(--border-radius);
-    background: var(--light-gray); /* Adicionar fundo cinza igual ao mobile */
     transition: all 0.3s ease;
-    cursor: pointer;
-    margin-bottom: var(--spacing-xs); /* Pequeno espaço entre as categorias */
+    margin-bottom: var(--spacing-xs);
 }
 
-.sidebar .category-item:hover {
-    background: var(--medium-gray); /* Cinza mais escuro no hover */
+.subcategory-list a:hover {
+    background: #f0f0f0; /* Cinza claro no hover */
+    color: var(--text-color);
     transform: translateX(5px);
+}
+
+.subcategory-list li:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    bottom: calc(-1 * var(--spacing-sm));
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent 0%, var(--medium-gray) 20%, var(--medium-gray) 80%, transparent 100%);
+    opacity: 0.6;
 }
 
 /* Banner Carrossel */
@@ -621,42 +626,6 @@ body {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-xl);
-}
-/*
-@media (max-width: 768px) {
-    .banner-carousel {
-        height: 400px;
-    }
-
-    .sidebar {
-        margin-bottom: var(--spacing-md);
-    }
-
-    .category-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--spacing-sm);
-    }
-
-    .category-item {
-        flex: 1 1 calc(50% - var(--spacing-sm));
-        justify-content: center;
-        padding: var(--spacing-md);
-        text-align: center;
-        flex-direction: column;
-    }
-}
-*/
-@media (max-width: 768px) {
-    .banner-carousel {
-        height: 400px;
-    }
-
-    .sidebar {
-        margin-bottom: var(--spacing-md);
-    }
-    
-    /* Remover as regras que interferem com o menu mobile */
 }
 
 /* Categorias */
@@ -869,279 +838,4 @@ footer {
     text-align: center;
     color: var(--dark-gray);
     font-size: 0.9rem;
-} 
-
-/* Subcategorias */
-.subcategory-list {
-    display: none;
-    margin-top: 5px;
-    margin-left: 30px;
-    padding-left: 0;
-    list-style: none;
-    border-left: none;
-  }
-  
-  .has-subcategory.open > .subcategory-list {
-    display: block;
-  }
-  
-  .arrow {
-    margin-left: auto;
-    font-size: 12px;
-    transition: transform 0.3s ease;
-    opacity: 0;
-    pointer-events: none;
-  }
-  
-  .has-subcategory.open .arrow {
-    transform: rotate(180deg);
-  }
-  
-  /* linhas das subcategorias tirar as linhas*/
-  /*.subcategory-list a {
-    text-decoration: none;
-    color: inherit; 
-  } */
-
-  /* Adicionar estas regras ao seu CSS para criar linhas divisórias nas subcategorias */
-
-/* Linha divisória entre subcategorias no menu mobile */
-.mobile-nav .subcategory-list li:not(:last-child) {
-    position: relative;
-    margin-bottom: var(--spacing-md);
-}
-
-.mobile-nav .subcategory-list li:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    bottom: calc(-1 * var(--spacing-sm));
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(
-        to right, 
-        transparent 0%, 
-        var(--medium-gray) 20%, 
-        var(--medium-gray) 80%, 
-        transparent 100%
-    );
-    opacity: 0.6;
-}
-
-/* Alternativa mais sutil com pontos */
-/*
-.mobile-nav .subcategory-list li:not(:last-child).dotted-divider::after {
-    background: none;
-    border-bottom: 1px dotted var(--medium-gray);
-    opacity: 0.5;
-}
-*/
-/* Alternativa com linha colorida baseada na cor primária do site */
-/*
-.mobile-nav .subcategory-list li:not(:last-child).primary-divider::after {
-    background: linear-gradient(
-        to right, 
-        transparent 0%, 
-        var(--primary-color) 30%, 
-        var(--primary-color) 70%, 
-        transparent 100%
-    );
-    opacity: 0.3;
-    height: 2px;
-}
-*/
-/* Ajustar o espaçamento do último item para não ter margem extra 
-.mobile-nav .subcategory-list li:last-child {
-    margin-bottom: var(--spacing-xs);
-}
-
-/* Versão com ícone decorativo no centro da linha 
-.mobile-nav .subcategory-list li:not(:last-child).icon-divider::after {
-    background: var(--light-gray);
-    height: 1px;
-}
-
-.mobile-nav .subcategory-list li:not(:last-child).icon-divider::before {
-    content: '•';
-    position: absolute;
-    bottom: calc(-1 * var(--spacing-sm) - 6px);
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--white);
-    color: var(--primary-color);
-    font-size: 12px;
-    padding: 0 var(--spacing-xs);
-    z-index: 1;
-}
-*/
-/* Hover effect para as subcategorias com linha 
-.mobile-nav .subcategory-list a:hover {
-    background: var(--light-gray);
-    color: var(--primary-color);
-    transform: translateX(5px);
-    border-radius: var(--border-radius);
-}
-
-/* Transição suave para as linhas 
-.mobile-nav .subcategory-list li:not(:last-child)::after {
-    transition: all 0.3s ease;
-}
-
-/* Efeito quando a subcategoria está sendo hovereada 
-.mobile-nav .subcategory-list li:hover::after {
-    opacity: 0.8;
-    transform: scaleX(1.05);
-}*/
-
-/*Filtro CSS para tornar o fundo transparente*/
-.sidebar .category-item img,
-.mobile-nav .category-item img {
-    width: 24px;
-    height: 24px;
-    flex-shrink: 0;
-    /* Remover fundo branco/cinza claro dos ícones */
-    filter: 
-        /* Aumentar contraste para realçar apenas o ícone */
-        contrast(2) 
-        /* Aumentar brilho para clarear áreas cinzas */
-        brightness(1.2)
-        /* Tornar áreas claras mais transparentes */
-        opacity(0.9);
-    /* Modo de mistura para integrar melhor com o fundo */
-    mix-blend-mode: multiply;
-}
-
-
-/*teste*/
-/* Substituir as regras existentes da sidebar pelas regras abaixo */
-
-/* Sidebar Desktop - Estilo igual ao mobile */
-.sidebar {
-    background: var(--white);
-    border-radius: var(--border-radius);
-    padding: var(--spacing-md);
-    height: fit-content;
-}
-
-.sidebar .categories h2 {
-    color: var(--text-color);
-    margin-bottom: var(--spacing-md);
-    padding-bottom: var(--spacing-sm);
-    border-bottom: 1px solid var(--medium-gray);
-}
-
-.sidebar .category-list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-sm);
-    list-style: none;
-}
-
-.sidebar .category-item {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-md);
-    padding: var(--spacing-sm) var(--spacing-md);
-    color: var(--text-color);
-    text-decoration: none;
-    border-radius: var(--border-radius);
-    background: var(--light-gray);
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-
-.sidebar .category-item:hover {
-    background: #e0e0e0; /* Cinza suave no hover */
-    transform: translateX(5px);
-}
-
-.sidebar .category-item img {
-    width: 24px;
-    height: 24px;
-    flex-shrink: 0;
-    filter: contrast(2) brightness(1.2) opacity(0.9);
-    mix-blend-mode: multiply;
-}
-
-.sidebar .category-item span {
-    flex: 1;
-    text-align: left;
-}
-
-.sidebar .arrow {
-    margin-left: auto;
-    font-size: 12px;
-    transition: transform 0.3s ease;
-}
-
-.sidebar .has-subcategory.open .arrow {
-    transform: rotate(180deg);
-}
-
-/* Subcategorias Desktop */
-.sidebar .subcategory-list {
-    display: none;
-    margin-top: var(--spacing-xs);
-    margin-left: 48px; /* Alinhamento com o texto das categorias principais */
-    padding-left: 0;
-    list-style: none;
-    /* REMOVER a linha vertical - comentar ou deletar a linha abaixo */
-    /* border-left: 2px solid var(--medium-gray); */
-}
-
-.sidebar .has-subcategory.open .subcategory-list {
-    display: block;
-}
-
-.sidebar .subcategory-list a {
-    display: block;
-    padding: var(--spacing-sm) var(--spacing-md);
-    color: var(--text-color);
-    text-decoration: none;
-    border-radius: var(--border-radius);
-    transition: all 0.3s ease;
-    margin-bottom: var(--spacing-xs);
-}
-
-.sidebar .subcategory-list a:hover {
-    background: #f0f0f0; /* Cinza claro suave no hover */
-    color: var(--text-color);
-    transform: translateX(5px);
-}
-
-/* Linha divisória entre subcategorias no desktop */
-.sidebar .subcategory-list li:not(:last-child) {
-    position: relative;
-    margin-bottom: var(--spacing-md);
-}
-
-.sidebar .subcategory-list li:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    bottom: calc(-1 * var(--spacing-sm));
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(
-        to right, 
-        transparent 0%, 
-        var(--medium-gray) 20%, 
-        var(--medium-gray) 80%, 
-        transparent 100%
-    );
-    opacity: 0.6;
-}
-
-.sidebar .subcategory-list li:last-child {
-    margin-bottom: var(--spacing-xs);
-}
-
-/* Transição suave para as linhas divisórias */
-.sidebar .subcategory-list li:not(:last-child)::after {
-    transition: all 0.3s ease;
-}
-
-.sidebar .subcategory-list li:hover::after {
-    opacity: 0.8;
-    transform: scaleX(1.05);
 }
