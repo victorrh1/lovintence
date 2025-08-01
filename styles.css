@@ -319,8 +319,6 @@ body {
     margin-left: 40px;
     padding-left: 0;
     list-style: none;
-    border-left: 2px solid var(--medium-gray); /* Linha divisória restaurada */
-    padding-left: var(--spacing-md);
 }
 
 .mobile-nav .has-subcategory.open .subcategory-list {
@@ -335,6 +333,7 @@ body {
     border-radius: var(--border-radius);
     transition: all 0.3s ease;
     margin-bottom: var(--spacing-xs);
+    white-space: nowrap; /* Garante que o texto fique na mesma linha */
 }
 
 .mobile-nav .subcategory-list a:hover {
@@ -343,15 +342,8 @@ body {
     transform: translateX(5px);
 }
 
-.mobile-nav .subcategory-list li:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    bottom: calc(-1 * var(--spacing-sm));
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(to right, transparent 0%, var(--medium-gray) 20%, var(--medium-gray) 80%, transparent 100%);
-    opacity: 0.6;
+.mobile-nav .subcategory-list li:not(:last-child) {
+    border-bottom: 1px solid #e0e0e0; /* Linha divisória entre subcategorias */
 }
 
 /* Overlay para quando o menu mobile está aberto */
@@ -419,7 +411,6 @@ body {
     transition: all 0.3s ease;
     cursor: pointer;
     margin-bottom: var(--spacing-xs);
-    border-bottom: 1px solid #e0e0e0; /* Divisória entre itens */
 }
 
 .category-item:hover {
@@ -470,7 +461,7 @@ body {
     border-radius: var(--border-radius);
     transition: all 0.3s ease;
     margin-bottom: var(--spacing-xs);
-    white-space: nowrap; /* Impede quebra de linha */
+    white-space: nowrap; /* Garante que o texto fique na mesma linha */
 }
 
 .subcategory-list a:hover {
@@ -479,15 +470,8 @@ body {
     transform: translateX(5px);
 }
 
-.subcategory-list li:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    bottom: calc(-1 * var(--spacing-sm));
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(to right, transparent 0%, var(--medium-gray) 20%, var(--medium-gray) 80%, transparent 100%);
-    opacity: 0.6;
+.subcategory-list li:not(:last-child) {
+    border-bottom: 1px solid #e0e0e0; /* Linha divisória entre subcategorias */
 }
 
 /* Banner Carrossel */
