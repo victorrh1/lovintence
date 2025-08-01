@@ -225,7 +225,7 @@ body {
 }
 
 .main-nav a:hover {
-    color: #f0f0f0; /* Cinza claro no hover */
+    color: #999999; /* ALTERAR A COR DO HOVER AONDE NO DESKTOP */
 }
 
 @media (min-width: 768px) {
