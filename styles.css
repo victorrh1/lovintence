@@ -992,3 +992,21 @@ footer {
     opacity: 0.8;
     transform: scaleX(1.05);
 }*/
+
+/* SOLUÇÃO 1: Filtro CSS para tornar o fundo transparente (Recomendado) */
+.sidebar .category-item img,
+.mobile-nav .category-item img {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    /* Remover fundo branco/cinza claro dos ícones */
+    filter: 
+        /* Aumentar contraste para realçar apenas o ícone */
+        contrast(2) 
+        /* Aumentar brilho para clarear áreas cinzas */
+        brightness(1.2)
+        /* Tornar áreas claras mais transparentes */
+        opacity(0.9);
+    /* Modo de mistura para integrar melhor com o fundo */
+    mix-blend-mode: multiply;
+}
