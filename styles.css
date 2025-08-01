@@ -81,14 +81,22 @@ body {
 
 .top-bar .container {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
+    gap: var(--spacing-md);
 }
 
 .top-bar a {
     color: var(--white);
     text-decoration: none;
     font-size: 0.9rem;
+}
+
+.instagram-icon img,
+.right-links img {
+    width: 40px;
+    height: 40px;
+    background: var(--white);
 }
 
 .main-header {
