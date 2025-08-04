@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../images/iconeaba.ico" type="image/x-icon">
-    <title>Importados Femininos</title>
+    <title>Importados Masculinos</title>
     <style>
         * {
             margin: 0;
@@ -282,6 +282,7 @@
     </div>
 
     <main class="main-container">
+        <!-- Botão de toggle para filtros (apenas visível no mobile) -->
         <button class="filter-toggle" onclick="toggleFilters()">
             Filtros
         </button>
@@ -385,8 +386,8 @@
                 </a>
 
                 <a href="../perfume-feminino-i/grandegarota.html" class="product-card">
-                    <img src="../images/ggF.png" alt="Perfume Grande Garot" class="product-image">
-                    <h2 class="product-title">GRANDE GAROT INSPIRAÇÃO PREMIUM</h2>
+                    <img src="../images/ggF.png" alt="Perfume Grande Garota" class="product-image">
+                    <h2 class="product-title">AZARTAFA INSPIRAÇÃO PREMIUM</h2>
                     <div class="product-price">R$ 399,90</div>
                     <div class="product-rating">★★★★☆ (85)</div>
                     <div class="prime-shipping">Frete GRÁTIS</div>
@@ -394,7 +395,7 @@
 
                 <a href="../perfume-feminino-i/milhao.html" class="product-card">
                     <img src="../images/milhaoF.png" alt="Perfume Milhão" class="product-image">
-                    <h2 class="product-title">MILHÃO INSPIRAÇÃO PREMIUM</h2>
+                    <h2 class="product-title">MILÃO INSPIRAÇÃO PREMIUM</h2>
                     <div class="product-price">R$ 459,90</div>
                     <div class="product-rating">★★★★★ (203)</div>
                     <div class="prime-shipping">Frete GRÁTIS</div>
@@ -407,10 +408,18 @@
                     <div class="product-rating">★★★★☆ (85)</div>
                     <div class="prime-shipping">Frete GRÁTIS</div>
                 </a>
-               
+
+                <a href="../perfume-feminino-i/milhao.html" class="product-card">
+                    <img src="../images/milhaoF.png" alt="Perfume Milhão" class="product-image">
+                    <h2 class="product-title">MILHÃO INSPIRAÇÃO PREMIUM</h2>
+                    <div class="product-price">R$ 399,90</div>
+                    <div class="product-rating">★★★★☆ (85)</div>
+                    <div class="prime-shipping">Frete GRÁTIS</div>
+                </a>
+
                 <a href="../perfume-feminino-i/giadora.html" class="product-card">
                     <img src="../images/gigiF.png" alt="Perfume Giadora" class="product-image">
-                    <h2 class="product-title">GIADORA INSPIRAÇÃO PREMIUM</h2>
+                    <h2 class="product-title">FERRAZ INSPIRAÇÃO PREMIUM</h2>
                     <div class="product-price">R$ 399,90</div>
                     <div class="product-rating">★★★★☆ (85)</div>
                     <div class="prime-shipping">Frete GRÁTIS</div>
@@ -423,19 +432,12 @@
                     <div class="product-rating">★★★★☆ (85)</div>
                     <div class="prime-shipping">Frete GRÁTIS</div>
                 </a>
-
-                <a href="../perfume-feminino-i/vidabela.html" class="product-card">
-                    <img src="../images/vidabelaF.png" alt="Perfume Vída Bela" class="product-image">
-                    <h2 class="product-title">VÍDA BELA INSPIRAÇÃO PREMIUM</h2>
-                    <div class="product-price">R$ 399,90</div>
-                    <div class="product-rating">★★★★☆ (85)</div>
-                    <div class="prime-shipping">Frete GRÁTIS</div>
-                </a>
             </div>
         </div>
     </main>
 
     <script>
+        // Função para toggle dos filtros no mobile
         function toggleFilters() {
             const sidebar = document.getElementById('sidebar');
             const toggleButton = document.querySelector('.filter-toggle');
@@ -444,16 +446,19 @@
             toggleButton.classList.toggle('active');
         }
 
+        // Adicione interatividade aos filtros
         document.querySelectorAll('.filter-option input').forEach(input => {
             input.addEventListener('change', () => {
                 console.log('Filtro alterado:', input.parentElement.textContent.trim());
             });
         });
 
+        // Ordenação
         document.querySelector('.sort-bar select').addEventListener('change', (e) => {
             console.log('Nova ordenação:', e.target.value);
         });
 
+        // Fechar filtros ao clicar em um produto no mobile
         document.querySelectorAll('.product-card').forEach(card => {
             card.addEventListener('click', () => {
                 if (window.innerWidth <= 768) {
