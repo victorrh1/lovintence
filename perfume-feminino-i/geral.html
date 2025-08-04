@@ -60,7 +60,6 @@
             gap: 20px;
         }
 
-        /* Botão de toggle para filtros (oculto no desktop) */
         .filter-toggle {
             display: none;
             background: #232f3e;
@@ -212,19 +211,16 @@
             margin-left: 10px;
         }
 
-        /* Media queries para mobile */
         @media (max-width: 768px) {
             .main-container {
                 flex-direction: column;
                 padding: 0 10px;
             }
 
-            /* Mostra o botão de toggle no mobile */
             .filter-toggle {
                 display: block;
             }
 
-            /* Sidebar fica oculta por padrão no mobile */
             .sidebar {
                 width: 100%;
                 margin-bottom: 20px;
@@ -232,7 +228,6 @@
                 animation: slideDown 0.3s ease-out;
             }
 
-            /* Quando ativa, mostra a sidebar */
             .sidebar.active {
                 display: block;
             }
@@ -253,7 +248,6 @@
             }
         }
 
-        /* Animação para o slide down */
         @keyframes slideDown {
             from {
                 opacity: 0;
@@ -275,14 +269,13 @@
 
     <div class="breadcrumb">
         <div class="breadcrumb-content">
-            <a href="../index.html">Início</a>
-            <a href="../perfume-feminino-i/geral.html">Perfumes</a> 
+            <a href="../index.html">Início</a> › 
+            <a href="../perfume-feminino-i/geral.html">Perfumes</a> › 
             <span>Femininos Importados</span>
         </div>
     </div>
 
     <main class="main-container">
-        <!-- Botão de toggle para filtros (apenas visível no mobile) -->
         <button class="filter-toggle" onclick="toggleFilters()">
             Filtros
         </button>
@@ -437,7 +430,6 @@
     </main>
 
     <script>
-        // Função para toggle dos filtros no mobile
         function toggleFilters() {
             const sidebar = document.getElementById('sidebar');
             const toggleButton = document.querySelector('.filter-toggle');
@@ -446,19 +438,16 @@
             toggleButton.classList.toggle('active');
         }
 
-        // Adicione interatividade aos filtros
         document.querySelectorAll('.filter-option input').forEach(input => {
             input.addEventListener('change', () => {
                 console.log('Filtro alterado:', input.parentElement.textContent.trim());
             });
         });
 
-        // Ordenação
         document.querySelector('.sort-bar select').addEventListener('change', (e) => {
             console.log('Nova ordenação:', e.target.value);
         });
 
-        // Fechar filtros ao clicar em um produto no mobile
         document.querySelectorAll('.product-card').forEach(card => {
             card.addEventListener('click', () => {
                 if (window.innerWidth <= 768) {
