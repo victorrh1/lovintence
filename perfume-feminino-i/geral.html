@@ -60,6 +60,7 @@
             gap: 20px;
         }
 
+        /* Botão de toggle para filtros (oculto no desktop) */
         .filter-toggle {
             display: none;
             background: #232f3e;
@@ -211,16 +212,19 @@
             margin-left: 10px;
         }
 
+        /* Media queries para mobile */
         @media (max-width: 768px) {
             .main-container {
                 flex-direction: column;
                 padding: 0 10px;
             }
 
+            /* Mostra o botão de toggle no mobile */
             .filter-toggle {
                 display: block;
             }
 
+            /* Sidebar fica oculta por padrão no mobile */
             .sidebar {
                 width: 100%;
                 margin-bottom: 20px;
@@ -228,6 +232,7 @@
                 animation: slideDown 0.3s ease-out;
             }
 
+            /* Quando ativa, mostra a sidebar */
             .sidebar.active {
                 display: block;
             }
@@ -248,6 +253,7 @@
             }
         }
 
+        /* Animação para o slide down */
         @keyframes slideDown {
             from {
                 opacity: 0;
