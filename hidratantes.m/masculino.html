@@ -1,9 +1,415 @@
-<html>
-    <head>
-        <title>Hidratantes masculinos</title>
-    </head>
-    <body>
-        <h1>EM CONSTRUÇÃO &#128517; </h1>
-        <a href="../index.html">Voltar</a>
-    </body>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../images/iconeaba.ico" type="image/x-icon">
+    <title>Hidratantes Masculinos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f3f3f3;
+        }
+
+        .header {
+            background: #232f3e;
+            color: white;
+            padding: 15px 0;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .breadcrumb {
+            background: #fff;
+            padding: 12px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .breadcrumb-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            font-size: 14px;
+        }
+
+        .breadcrumb a {
+            color: #007185;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: #c7511f;
+            text-decoration: underline;
+        }
+
+        .main-container {
+            max-width: 1400px;
+            margin: 20px auto;
+            padding: 0 20px;
+            display: flex;
+            gap: 20px;
+        }
+
+        /* Botão de toggle para filtros (oculto no desktop) */
+        .filter-toggle {
+            display: none;
+            background: #232f3e;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            width: 100%;
+            text-align: left;
+        }
+
+        .filter-toggle:hover {
+            background: #37475a;
+        }
+
+        .filter-toggle::after {
+            content: '▼';
+            float: right;
+            transition: transform 0.3s ease;
+        }
+
+        .filter-toggle.active::after {
+            transform: rotate(180deg);
+        }
+
+        .sidebar {
+            width: 280px;
+            flex-shrink: 0;
+            background: white;
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .sidebar h3 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: #0F1111;
+        }
+
+        .filter-section {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 15px;
+        }
+
+        .filter-section:last-child {
+            border-bottom: none;
+        }
+
+        .filter-option {
+            margin: 8px 0;
+        }
+
+        .filter-option label {
+            display: flex;
+            align-items: center;
+            color: #565959;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .filter-option input[type="checkbox"] {
+            margin-right: 8px;
+        }
+
+        .products-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background: #fcfcfc;
+            border-radius: 4px;
+            padding: 15px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+
+        .product-title {
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: #0F1111;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            flex-grow: 1;
+        }
+
+        .product-price {
+            font-size: 18px;
+            font-weight: bold;
+            color: #0F1111;
+            margin-bottom: 5px;
+        }
+
+        .product-rating {
+            color: #f8b400;
+            font-size: 14px;
+        }
+
+        .prime-shipping {
+            color: #565959;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .sort-bar {
+            background: white;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .sort-bar select {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-left: 10px;
+        }
+
+        /* Media queries para mobile */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+                padding: 0 10px;
+            }
+
+            /* Mostra o botão de toggle no mobile */
+            .filter-toggle {
+                display: block;
+            }
+
+            /* Sidebar fica oculta por padrão no mobile */
+            .sidebar {
+                width: 100%;
+                margin-bottom: 20px;
+                display: none;
+                animation: slideDown 0.3s ease-out;
+            }
+
+            /* Quando ativa, mostra a sidebar */
+            .sidebar.active {
+                display: block;
+            }
+
+            .sort-bar {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+
+            .breadcrumb-content,
+            .header-content {
+                padding: 0 10px;
+            }
+        }
+
+        /* Animação para o slide down */
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1>Hidratantes Masculinos</h1>
+        </div>
+    </header>
+
+    <div class="breadcrumb">
+        <div class="breadcrumb-content">
+            <a href="../index.html">Início</a> › 
+            <a href="../hidratantes.m/masculino.html">Hidratantes</a> › 
+            <span>Masculinos</span>
+        </div>
+    </div>
+
+    <main class="main-container">
+        <!-- Botão de toggle para filtros (apenas visível no mobile) -->
+        <button class="filter-toggle" onclick="toggleFilters()">
+            Filtros
+        </button>
+
+        <aside class="sidebar" id="sidebar">
+            <div class="filter-section">
+                <h3>Categorias</h3>
+                <div class="filter-option">
+                    <label>
+                        <input type="checkbox" checked> Importados
+                    </label>
+                </div>
+                <div class="filter-option">
+                    <label>
+                        <input type="checkbox"> Nacionais
+                    </label>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <h3>Faixa de Preço</h3>
+                <div class="filter-option">
+                    <label>
+                        <input type="checkbox"> Até R$ 100
+                    </label>
+                </div>
+                <div class="filter-option">
+                    <label>
+                        <input type="checkbox"> R$ 100 a R$ 200
+                    </label>
+                </div>
+                <div class="filter-option">
+                    <label>
+                        <input type="checkbox"> R$ 200 a R$ 500
+                    </label>
+                </div>
+                <div class="filter-option">
+                    <label>
+                        <input type="checkbox"> Acima de R$ 500
+                    </label>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <h3>Marcas</h3>
+                <div class="filter-option">
+                    <label>
+                        <input type="checkbox"> kit1
+                    </label>
+                </div>
+                <div class="filter-option">
+                    <label>
+                        <input type="checkbox"> kit2
+                    </label>
+                </div>
+                
+            </div>
+
+            <div class="filter-section">
+                <h3>Avaliação</h3>
+                <div class="filter-option">
+                    <label>
+                        <input type="checkbox"> ★★★★☆ & Acima
+                    </label>
+                </div>
+                <div class="filter-option">
+                    <label>
+                        <input type="checkbox"> ★★★☆☆ & Acima
+                    </label>
+                </div>
+            </div>
+        </aside>
+
+        <div class="products-container">
+            <div class="sort-bar">
+                <span>Ordenar por:</span>
+                <select>
+                    <option>Mais Relevantes</option>
+                    <option>Menor Preço</option>
+                    <option>Maior Preço</option>
+                    <option>Mais Avaliados</option>
+                </select>
+            </div>
+
+            <div class="products-grid">
+                <a href="../hidratantes.m/gelm.html" class="product-card">
+                    <img src="../images/gelm.jpeg" alt="Gel 1" class="product-image">
+                    <h2 class="product-title">GEL 1 </h2>
+                    <div class="product-price">R$ 299,90</div>
+                    <div class="product-rating">★★★★★ (128)</div>
+                    <div class="prime-shipping">Frete GRÁTIS</div>
+                </a>
+
+
+    <script>
+        // Função para toggle dos filtros no mobile
+        function toggleFilters() {
+            const sidebar = document.getElementById('sidebar');
+            const toggleButton = document.querySelector('.filter-toggle');
+            
+            sidebar.classList.toggle('active');
+            toggleButton.classList.toggle('active');
+        }
+
+        // Adicione interatividade aos filtros
+        document.querySelectorAll('.filter-option input').forEach(input => {
+            input.addEventListener('change', () => {
+                console.log('Filtro alterado:', input.parentElement.textContent.trim());
+            });
+        });
+
+        // Ordenação
+        document.querySelector('.sort-bar select').addEventListener('change', (e) => {
+            console.log('Nova ordenação:', e.target.value);
+        });
+
+        // Fechar filtros ao clicar em um produto no mobile
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    const sidebar = document.getElementById('sidebar');
+                    const toggleButton = document.querySelector('.filter-toggle');
+                    sidebar.classList.remove('active');
+                    toggleButton.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
 </html>
