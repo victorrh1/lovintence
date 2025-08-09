@@ -173,6 +173,20 @@ body {
     color:#fdfaf8 !important;
 }
 
+/* --- CSS para controlar a visibilidade da barra de busca --- */
+
+/* Por padrão (Mobile First), a barra de busca fica escondida */
+.search-bar {
+    display: none;
+}
+
+/* Quando a tela tiver no mínimo 768px de largura (tablets e desktops), a barra de busca aparece */
+@media (min-width: 768px) {
+    .search-bar {
+        display: block; /* ou flex, grid, etc., dependendo do seu layout */
+    }
+}
+
 /* Ações do Usuário */
 .user-actions {
     display: none;
