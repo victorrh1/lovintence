@@ -60,9 +60,10 @@
                         <i class="fas fa-clipboard-list"></i>
                         <span>Pedidos</span>
                     </a>
-                    <a href="#" class="cart">
+                    <a href="#carrinho" class="cart cart-icon">
                         <i class="fas fa-shopping-cart"></i>
                         <span>Carrinho</span>
+                        <span class="cart-count" id="cart-count">0</span>
                     </a>
                 </div>
             </div>
@@ -171,6 +172,30 @@
             </div>
         </nav>
     </header>
+
+    <!-- MODAL DO CARRINHO -->
+    <div class="cart-modal" id="carrinho">
+        <div class="cart-modal-content">
+            <div class="cart-header">
+                <h2>Meu Carrinho</h2>
+                <button class="close-cart">&times;</button>
+            </div>
+            <div class="cart-body">
+                <div class="cart-items">
+                    <p>Seu carrinho está vazio.</p>
+                </div>
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <h3>Total: <span id="cart-total-price">R$ 0,00</span></h3>
+                </div>
+                <div class="cart-actions">
+                    <button id="clear-cart" class="btn-secondary">Limpar Carrinho</button>
+                    <button id="checkout-btn" class="btn-primary">Finalizar Compra</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <main>
         <div class="container main-container">
@@ -297,11 +322,11 @@
                         <a href="#" class="view-all">Ver todos</a>
                     </div>
                     <div class="product-grid">
-                        <div class="product-card">
+                        <div class="product-card service-card" data-id="1" data-price="119.99">
                             <div class="product-image">
                                 <span class="discount">37% OFF</span>
                                 <img src="images/MILAO.jpeg" alt="Perfume Milao">
-                                <button class="quick-add">
+                                <button class="quick-add add-to-cart">
                                     <i class="fas fa-shopping-cart"></i>
                                     Adicionar
                                 </button>
@@ -309,17 +334,17 @@
                             <div class="product-info">
                                 <h3>Milão</h3>
                                 <div class="price-container">
-                                    <P class="old-price">R$ 150,00</P>
+                                    <p class="old-price">R$ 150,00</p>
                                     <p class="price">R$ 119,99</p>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="product-card">
+                        <div class="product-card service-card" data-id="2" data-price="129.99">
                             <div class="product-image">
                                 <span class="discount">37% OFF</span>
                                 <img src="images/AZAR.jpeg" alt="Perfume 4444">
-                                <button class="quick-add">
+                                <button class="quick-add add-to-cart">
                                     <i class="fas fa-shopping-cart"></i>
                                     Adicionar
                                 </button>
@@ -333,11 +358,11 @@
                             </div>
                         </div>
 
-                        <div class="product-card">
+                        <div class="product-card service-card" data-id="3" data-price="99.90">
                             <div class="product-image">
                                 <span class="discount">45% OFF</span>
                                 <img src="images/bleucha.jpeg" alt="Perfume 222">
-                                <button class="quick-add">
+                                <button class="quick-add add-to-cart">
                                     <i class="fas fa-shopping-cart"></i>
                                     Adicionar
                                 </button>
@@ -351,25 +376,26 @@
                             </div>
                         </div>
 
-                                <div class="product-card">
-                        <div class="product-image">
-                            <span class="discount">37% OFF</span>
-                            <img src="images/giadoraF.jpeg" alt="Perfume Giadora Feminino">
-                            <button class="quick-add">
-                                <i class="fas fa-shopping-cart"></i>
-                                Adicionar
-                            </button>
-                        </div>
-                        <div class="product-info">
-                            <h3>Giadora Feminino</h3>
-                            <div class="price-container">
-                                <p class="old-price">R$ 105,00</p>
-                                <p class="price">R$ 99,90</p>
+                        <div class="product-card service-card" data-id="4" data-price="99.90">
+                            <div class="product-image">
+                                <span class="discount">37% OFF</span>
+                                <img src="images/giadoraF.jpeg" alt="Perfume Giadora Feminino">
+                                <button class="quick-add add-to-cart">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    Adicionar
+                                </button>
+                            </div>
+                            <div class="product-info">
+                                <h3>Giadora Feminino</h3>
+                                <div class="price-container">
+                                    <p class="old-price">R$ 105,00</p>
+                                    <p class="price">R$ 99,90</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            </div>
         </div>
     </main>
 
@@ -413,4 +439,4 @@
     </footer>
     <script src="script.js"></script>
 </body>
-</html> 
+</html>

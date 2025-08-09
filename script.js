@@ -1,5 +1,22 @@
+// ===== VARIÁVEIS DO CARRINHO =====
+const cartModal = document.getElementById('carrinho');
+const closeCart = document.querySelector('.close-cart');
+const clearCartBtn = document.getElementById('clear-cart');
+const checkoutBtn = document.getElementById('checkout-btn');
+const cartItemsContainer = document.querySelector('.cart-items');
+const cartTotalPrice = document.getElementById('cart-total-price');
+const cartCount = document.getElementById('cart-count');
+const addToCartButtons = document.querySelectorAll('.add-to-cart');
+
+let cart = [];
+
 document.addEventListener('DOMContentLoaded', function() {
-    // Código do carrossel existente
+    // ===== INICIALIZAÇÃO DO CARRINHO =====
+    setupCartEventListeners();
+    loadCartFromStorage();
+    updateCartUI();
+
+    // ===== CÓDIGO DO CARROSSEL EXISTENTE =====
     const carousel = document.querySelector('.banner-carousel');
     const slides = carousel.querySelectorAll('.carousel-slide');
     const dots = carousel.querySelectorAll('.dot');
@@ -29,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Event listeners para os botões
+    // Event listeners para os botões do carrossel
     prevButton.addEventListener('click', () => {
         goToSlide(currentSlide - 1);
         resetInterval();
@@ -70,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
         startInterval();
     });
 
-    // Controle do Menu Mobile
+    // ===== CONTROLE DO MENU MOBILE =====
     const menuToggle = document.getElementById('menuToggle');
     const mobileNav = document.getElementById('mobileNav');
     const body = document.body;
@@ -114,4 +131,251 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// ===== FUNÇÕES DO SISTEMA DE CARRINHO =====
 
+function setupCartEventListeners() {
+    // Botões "Adicionar ao Carrinho"
+    const addToCartButtons = document.querySelectorAll('.add-to-cart');
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', addToCart);
+    });
+
+    // Fechar carrinho
+    if (closeCart) {
+        closeCart.addEventListener('click', () => {
+            cartModal.classList.remove('active');
+        });
+    }
+
+    // Abrir carrinho
+    const cartIcon = document.querySelector('.cart-icon');
+    if (cartIcon) {
+        cartIcon.addEventListener('click', (e) => {
+            e.preventDefault();
+            cartModal.classList.add('active');
+        });
+    }
+
+    // Fechar carrinho clicando fora do modal
+    window.addEventListener('click', (e) => {
+        if (e.target === cartModal) {
+            cartModal.classList.remove('active');
+        }
+    });
+
+    // Limpar carrinho
+    if (clearCartBtn) {
+        clearCartBtn.addEventListener('click', clearCart);
+    }
+
+    // Finalizar compra
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', proceedToCheckout);
+    }
+}
+
+// Adicionar item ao carrinho
+function addToCart(e) {
+    const serviceCard = e.target.closest('.service-card');
+    const serviceId = parseInt(serviceCard.dataset.id);
+    const serviceName = serviceCard.querySelector('h3').textContent;
+    const servicePrice = parseFloat(serviceCard.dataset.price);
+
+    // Verificar se o serviço já está no carrinho
+    const existingItem = cart.find(item => item.id === serviceId);
+
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({
+            id: serviceId,
+            name: serviceName,
+            price: servicePrice,
+            quantity: 1
+        });
+    }
+
+    // Notificação de item adicionado
+    showNotification(`${serviceName} adicionado ao carrinho!`);
+
+    // Atualizar carrinho
+    saveCartToStorage();
+    updateCartUI();
+}
+
+// Atualizar interface do carrinho
+function updateCartUI() {
+    // Atualizar contagem de itens
+    const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+    if (cartCount) {
+        cartCount.textContent = totalItems;
+    }
+
+    // Atualizar itens no modal
+    if (cartItemsContainer) {
+        cartItemsContainer.innerHTML = '';
+
+        if (cart.length === 0) {
+            cartItemsContainer.innerHTML = '<p>Seu carrinho está vazio.</p>';
+        } else {
+            cart.forEach(item => {
+                const cartItemElement = document.createElement('div');
+                cartItemElement.className = 'cart-item';
+                cartItemElement.innerHTML = `
+                    <div class="cart-item-info">
+                        <h4>${item.name}</h4>
+                        <p>R$ ${item.price.toFixed(2)}</p>
+                    </div>
+                    <div class="cart-item-actions">
+                        <button class="decrease" data-id="${item.id}">-</button>
+                        <span>${item.quantity}</span>
+                        <button class="increase" data-id="${item.id}">+</button>
+                        <button class="remove" data-id="${item.id}">Remover</button>
+                    </div>
+                `;
+                cartItemsContainer.appendChild(cartItemElement);
+            });
+        }
+    }
+
+    // Atualizar preço total
+    const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+    if (cartTotalPrice) {
+        cartTotalPrice.textContent = `R$ ${totalPrice.toFixed(2)}`;
+    }
+
+    // Configurar botões de ação em cada item
+    setupCartItemButtons();
+}
+
+// Configurar botões dos itens do carrinho
+function setupCartItemButtons() {
+    document.querySelectorAll('.decrease').forEach(btn => {
+        btn.addEventListener('click', decreaseItemQuantity);
+    });
+    document.querySelectorAll('.increase').forEach(btn => {
+        btn.addEventListener('click', increaseItemQuantity);
+    });
+    document.querySelectorAll('.remove').forEach(btn => {
+        btn.addEventListener('click', removeItem);
+    });
+}
+
+// Diminuir quantidade do item
+function decreaseItemQuantity(e) {
+    const id = parseInt(e.target.dataset.id);
+    const item = cart.find(i => i.id === id);
+    if (item) {
+        item.quantity--;
+        if (item.quantity <= 0) {
+            cart = cart.filter(i => i.id !== id);
+        }
+    }
+    saveCartToStorage();
+    updateCartUI();
+}
+
+// Aumentar quantidade do item
+function increaseItemQuantity(e) {
+    const id = parseInt(e.target.dataset.id);
+    const item = cart.find(i => i.id === id);
+    if (item) {
+        item.quantity++;
+    }
+    saveCartToStorage();
+    updateCartUI();
+}
+
+// Remover item do carrinho
+function removeItem(e) {
+    const id = parseInt(e.target.dataset.id);
+    cart = cart.filter(i => i.id !== id);
+    saveCartToStorage();
+    updateCartUI();
+}
+
+// Limpar carrinho completamente
+function clearCart() {
+    cart = [];
+    saveCartToStorage();
+    updateCartUI();
+    showNotification('Carrinho limpo com sucesso!');
+}
+
+// ===== PERSISTÊNCIA DE DADOS =====
+
+// Salvar carrinho no localStorage
+function saveCartToStorage() {
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+// Carregar carrinho do localStorage
+function loadCartFromStorage() {
+    const storedCart = localStorage.getItem('cart');
+    if (storedCart) {
+        cart = JSON.parse(storedCart);
+    }
+}
+
+// ===== FUNCIONALIDADES DE CHECKOUT =====
+
+// Prosseguir para checkout
+function proceedToCheckout() {
+    if (cart.length === 0) {
+        showNotification('Adicione produtos ao carrinho antes de finalizar a compra.');
+        return;
+    }
+
+    // Aqui você pode implementar:
+    // 1. Redirecionar para página de checkout
+    // 2. Abrir modal de checkout
+    // 3. Integrar com gateway de pagamento
+    
+    // Exemplo de redirecionamento:
+    // window.location.href = '/checkout';
+    
+    // Exemplo de dados para enviar ao checkout:
+    const checkoutData = {
+        items: cart,
+        total: getCartTotal(),
+        itemCount: getCartItemCount()
+    };
+    
+    console.log('Dados do checkout:', checkoutData);
+    showNotification('Redirecionando para o checkout...');
+    
+    // Implementar sua lógica de checkout aqui
+}
+
+// Mostrar notificação
+function showNotification(message) {
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.textContent = message;
+    document.body.appendChild(notification);
+    setTimeout(() => {
+        notification.remove();
+    }, 3000);
+}
+
+// ===== FUNÇÕES UTILITÁRIAS =====
+
+// Obter total de itens no carrinho
+function getCartItemCount() {
+    return cart.reduce((total, item) => total + item.quantity, 0);
+}
+
+// Obter valor total do carrinho
+function getCartTotal() {
+    return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+}
+
+// Verificar se um item está no carrinho
+function isItemInCart(itemId) {
+    return cart.some(item => item.id === itemId);
+}
+
+// Obter item do carrinho por ID
+function getCartItem(itemId) {
+    return cart.find(item => item.id === itemId);
+}
