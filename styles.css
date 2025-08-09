@@ -1177,20 +1177,9 @@ footer {
 /* Responsividade Mobile */
 @media (max-width: 768px) {
     .cart-modal-content {
-      width: 320px; /* largura fixa para mobile */
-      max-width: 320px;
-      min-width: 280px;
-      height: 100vh;
-      top: 0;
-      right: 0;
-      left: auto; /* evitar conflito com left */
-      position: fixed;
-      box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-      transition: right 0.3s ease;
-    }
-
-    .cart-modal.active .cart-modal-content {
-        right: 0;
+        width: 85%;
+        max-width: 320px;
+        min-width: 280px;
     }
     
     .cart-header {
@@ -1290,5 +1279,75 @@ footer {
     
     .cart-footer {
         padding: 12px;
+    }
+}
+
+/* ===== ADICIONE ESTAS REGRAS AO SEU ARQUIVO styles.css ===== */
+
+/* Modificação no header mobile para incluir o carrinho */
+@media (max-width: 767px) {
+    .main-header .container {
+        grid-template-columns: auto auto 1fr auto; /* Adicionado espaço para o carrinho */
+        gap: 12px;
+    }
+    
+    /* Ícone do carrinho mobile - mostra apenas em mobile */
+    .user-actions-mobile {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .user-actions-mobile .cart {
+        color: var(--text-color);
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 0.8rem;
+        position: relative;
+        padding: 4px;
+    }
+    
+    .user-actions-mobile .cart i {
+        font-size: 1.4rem;
+        margin-bottom: 2px;
+    }
+    
+    .user-actions-mobile .cart span:not(.cart-count) {
+        font-size: 0.7rem;
+        line-height: 1;
+    }
+    
+    /* Contador do carrinho mobile */
+    .user-actions-mobile .cart-count {
+        position: absolute;
+        top: -2px;
+        right: -2px;
+        background: #ff4444;
+        color: white;
+        border-radius: 50%;
+        width: 16px;
+        height: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        font-weight: bold;
+        min-width: 16px;
+    }
+}
+
+/* Esconder o carrinho mobile em desktop */
+@media (min-width: 768px) {
+    .user-actions-mobile {
+        display: none !important;
+    }
+}
+
+/* Ajuste na barra de pesquisa para dar espaço ao carrinho */
+@media (max-width: 767px) {
+    .search-bar {
+        margin-right: 8px; /* Pequeno espaço entre busca e carrinho */
     }
 }

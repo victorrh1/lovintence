@@ -131,9 +131,11 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// ===== FUNÇÕES DO SISTEMA DE CARRINHO =====
+// ===== FUNÇÕES DO SISTEMA DE CARRINHO (CORRIGIDAS) =====
 
 function setupCartEventListeners() {
+    console.log('Configurando event listeners do carrinho...');
+    
     // Botões "Adicionar ao Carrinho"
     const addToCartButtons = document.querySelectorAll('.add-to-cart');
     addToCartButtons.forEach(button => {
@@ -147,14 +149,21 @@ function setupCartEventListeners() {
         });
     }
 
-    // Abrir carrinho
-    const cartIcon = document.querySelector('.cart-icon');
-    if (cartIcon) {
+    // ===== CORREÇÃO: Abrir carrinho - AMBOS OS ÍCONES (DESKTOP E MOBILE) =====
+    const cartIcons = document.querySelectorAll('.cart-icon');
+    console.log(`Configurando ${cartIcons.length} ícones de carrinho`);
+    
+    cartIcons.forEach((cartIcon, index) => {
         cartIcon.addEventListener('click', (e) => {
             e.preventDefault();
-            cartModal.classList.add('active');
+            console.log(`Carrinho clicado (ícone ${index + 1})`);
+            if (cartModal) {
+                cartModal.classList.add('active');
+            } else {
+                console.error('Modal do carrinho não encontrado!');
+            }
         });
-    }
+    });
 
     // Fechar carrinho clicando fora do modal
     window.addEventListener('click', (e) => {
@@ -203,12 +212,20 @@ function addToCart(e) {
     updateCartUI();
 }
 
-// Atualizar interface do carrinho
+// ===== CORREÇÃO: Atualizar interface do carrinho com sincronização mobile =====
 function updateCartUI() {
     // Atualizar contagem de itens
     const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+    
+    // Desktop
     if (cartCount) {
         cartCount.textContent = totalItems;
+    }
+    
+    // Mobile
+    const cartCountMobile = document.getElementById('cart-count-mobile');
+    if (cartCountMobile) {
+        cartCountMobile.textContent = totalItems;
     }
 
     // Atualizar itens no modal
@@ -228,9 +245,9 @@ function updateCartUI() {
                     </div>
                     <div class="cart-item-actions">
                         <button class="decrease" data-id="${item.id}">-</button>
-                        <span>${item.quantity}</span>
+                        <span class="cart-item-quantity">${item.quantity}</span>
                         <button class="increase" data-id="${item.id}">+</button>
-                        <button class="remove" data-id="${item.id}">Remover</button>
+                        <button class="remove" data-id="${item.id}">🗑️</button>
                     </div>
                 `;
                 cartItemsContainer.appendChild(cartItemElement);
@@ -349,12 +366,21 @@ function proceedToCheckout() {
 
 // Mostrar notificação
 function showNotification(message) {
+    // Remover notificação existente
+    const existingNotification = document.querySelector('.notification');
+    if (existingNotification) {
+        existingNotification.remove();
+    }
+
     const notification = document.createElement('div');
     notification.className = 'notification';
     notification.textContent = message;
     document.body.appendChild(notification);
+    
     setTimeout(() => {
-        notification.remove();
+        if (notification.parentNode) {
+            notification.remove();
+        }
     }, 3000);
 }
 
