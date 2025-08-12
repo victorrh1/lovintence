@@ -31,9 +31,9 @@
     box-sizing: border-box;
     font-family: 'Helvetica Neue', Arial, sans-serif;
 }
-
+/* mudar cor do container, o fundo do site*/
 body {
-    background: var(--light-gray);
+    background-color: #f8ebf1;;
     color: var(--text-color);
     line-height: 1.6;
 }
@@ -1452,4 +1452,30 @@ footer {
     .main-header .container {
         gap: 4px; /* Menor espaçamento geral */
     }
+}
+
+h1 {
+    color: #d81b60;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+p {
+    color: #555;
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    
+}
+.heart {
+    font-size: 1.5em;
+    color: #d81b60;
+}
+.flower {
+    position: absolute;
+    opacity: 0.6;
+    animation: float 8s infinite ease-in-out;
+}
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(10deg); }
 }
