@@ -113,8 +113,14 @@ body {
 }
 
 .logo img {
-    height: 85px;
+    height: 100px;
     width: auto;
+}
+
+@media (max-width: 767px) {
+    .logo {
+        visibility: hidden; /* esconde no mobile */
+    }
 }
 
 .mobile-menu {
