@@ -1295,7 +1295,7 @@ footer {
     .user-actions-mobile {
         display: flex;
         gap: var(--spacing-md);
-        justify-content: center;
+        justify-content: flex-end;
         align-items: center;
         
     }
