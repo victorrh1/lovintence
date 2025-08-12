@@ -112,14 +112,47 @@ body {
     align-items: center;
 }
 
+/* Desktop - logo normal */
 .logo img {
     height: 100px;
     width: auto;
 }
 
+/* Mobile - logo centralizada */
 @media (max-width: 767px) {
+    .main-header .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+    }
+    
+    .mobile-menu {
+        order: 1;
+        flex: 0 0 auto;
+    }
+    
     .logo {
-        visibility: hidden; /* esconde no mobile */
+        visibility: visible !important;
+        order: 2;
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .logo img {
+        height: 100px;
+        width: auto;
+    }
+    
+    .user-actions-mobile {
+        order: 3;
+        flex: 0 0 auto;
+        flex-direction: column !important;
+        align-items: center;
+        gap: 8px;
+        margin-left: 0;
     }
 }
 
