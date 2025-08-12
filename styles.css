@@ -1386,6 +1386,7 @@ footer {
     }
 }
 
+
 @media (max-width: 350px) {
     .user-actions-mobile {
         gap: 4px; /* Menos espaço entre ícones */
