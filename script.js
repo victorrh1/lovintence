@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
     loadCartFromStorage();
     updateCartUI();
 
-    // ===== CÓDIGO DO CARROSSEL EXISTENTE =====
+    // ===== CARROSSEL =====
     const carousel = document.querySelector('.banner-carousel');
     const slides = carousel.querySelectorAll('.carousel-slide');
     const dots = carousel.querySelectorAll('.dot');
@@ -106,8 +106,6 @@ document.addEventListener('DOMContentLoaded', function() {
     menuToggle.addEventListener('click', toggleMenu);
     overlay.addEventListener('click', toggleMenu);
 
-    // CORREÇÃO: Fechar menu apenas ao clicar em links de subcategorias ou categorias sem subcategorias
-    // Links de subcategorias (dentro de .subcategory-list)
     const subcategoryLinks = mobileNav.querySelectorAll('.subcategory-list a');
     subcategoryLinks.forEach(link => {
         link.addEventListener('click', () => {
@@ -115,7 +113,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Links de categorias que NÃO possuem subcategorias (não possuem a classe .has-subcategory)
     const singleCategoryLinks = mobileNav.querySelectorAll('li:not(.has-subcategory) > a');
     singleCategoryLinks.forEach(link => {
         link.addEventListener('click', () => {
@@ -131,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// ===== FUNÇÕES DO SISTEMA DE CARRINHO (CORRIGIDAS) =====
+// ===== FUNÇÕES DO SISTEMA DE CARRINHO  =====
 
 function setupCartEventListeners() {
     console.log('Configurando event listeners do carrinho...');
@@ -149,7 +146,7 @@ function setupCartEventListeners() {
         });
     }
 
-    // ===== CORREÇÃO: Abrir carrinho - AMBOS OS ÍCONES (DESKTOP E MOBILE) =====
+    // ===== Abrir carrinho - AMBOS OS ÍCONES (DESKTOP E MOBILE) =====
     const cartIcons = document.querySelectorAll('.cart-icon');
     console.log(`Configurando ${cartIcons.length} ícones de carrinho`);
     
@@ -212,17 +209,17 @@ function addToCart(e) {
     updateCartUI();
 }
 
-// ===== CORREÇÃO: Atualizar interface do carrinho com sincronização mobile =====
+// ===== interface do carrinho com sincronização mobile =====
 function updateCartUI() {
     // Atualizar contagem de itens
     const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
     
-    // Desktop
+    // carrinho - Desktop
     if (cartCount) {
         cartCount.textContent = totalItems;
     }
     
-    // Mobile
+    // carrinho - Mobile
     const cartCountMobile = document.getElementById('cart-count-mobile');
     if (cartCountMobile) {
         cartCountMobile.textContent = totalItems;
@@ -265,7 +262,7 @@ function updateCartUI() {
     setupCartItemButtons();
 }
 
-// Configurar botões dos itens do carrinho
+// Config botões dos itens do carrinho
 function setupCartItemButtons() {
     document.querySelectorAll('.decrease').forEach(btn => {
         btn.addEventListener('click', decreaseItemQuantity);
@@ -319,7 +316,7 @@ function clearCart() {
     showNotification('Carrinho limpo com sucesso!');
 }
 
-// ===== PERSISTÊNCIA DE DADOS =====
+// ===== PERSISTÊNCIA DE DADOS do CARRINHO =====
 
 // Salvar carrinho no localStorage
 function saveCartToStorage() {
@@ -334,7 +331,7 @@ function loadCartFromStorage() {
     }
 }
 
-// ===== FUNCIONALIDADES DE CHECKOUT =====
+// ===== FUNCIONALIDADES CARRINHO DE CHECKOUT =====
 
 // Prosseguir para checkout
 function proceedToCheckout() {
@@ -343,7 +340,7 @@ function proceedToCheckout() {
         return;
     }
 
-    // Aqui você pode implementar:
+    // oque falta implementar:
     // 1. Redirecionar para página de checkout
     // 2. Abrir modal de checkout
     // 3. Integrar com gateway de pagamento
@@ -361,7 +358,7 @@ function proceedToCheckout() {
     console.log('Dados do checkout:', checkoutData);
     showNotification('Redirecionando para o checkout...');
     
-    // Implementar sua lógica de checkout aqui
+    // Implementar lógica de checkout....EM CONSTRUÇÃO
 }
 
 // Mostrar notificação
@@ -384,7 +381,7 @@ function showNotification(message) {
     }, 3000);
 }
 
-// ===== FUNÇÕES UTILITÁRIAS =====
+// ===== FUNÇÕES de utilidades CARRINHO =====
 
 // Obter total de itens no carrinho
 function getCartItemCount() {
@@ -405,3 +402,6 @@ function isItemInCart(itemId) {
 function getCartItem(itemId) {
     return cart.find(item => item.id === itemId);
 }
+
+// auto copyright
+document.getElementById("copyright-year").textContent = new Date().getFullYear();
