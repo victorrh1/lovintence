@@ -31,14 +31,21 @@
     box-sizing: border-box;
     font-family: 'Helvetica Neue', Arial, sans-serif;
 }
-/* mudar cor do container, o fundo do site e landingpage do login*/
+/* desktop mudar cor do container, o fundo do site e landingpage do login*/
 body {
     background-color: #f8ebf1;;
     color: var(--text-color);
     line-height: 1.6;
-    background-image: url("images/rose.jpg");
+    background-image: url("images/roseta.jpeg");
 }
 
+/* mobile fundo do site 
+@media (max-width: 768px) {
+    body {
+        background-image: url("images/mobile.jpeg"); /* Imagem para Mobile 
+        background-attachment: scroll; /* Permite que a imagem role com a página em dispositivos móveis 
+    }
+}*/
 
 
 .container {
