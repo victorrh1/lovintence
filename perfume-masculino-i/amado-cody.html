@@ -235,7 +235,7 @@
       font-size: 10px;
       font-weight: bold;
     }
-
+    
     /* Seletor de Quantidade Estilo Mercado Livre */
     .estoque {
       margin-bottom: 24px;
@@ -854,24 +854,110 @@
   </div>
 
   <script>
+    // Variáveis globais
     let quantidadeAtual = 1;
     let variacaoAtual = '50ml';
     let precoAtual = 229;
 
-    // Dados das variações com preços
+    // Dados das variações
     const variacoes = {
       '50ml': {
         preco: 229,
         parcelas: 19.08,
-        imagem: '../images/50ml.jpeg'
+        imagem: '../images/amadocodyM.jpeg'
       },
       '100ml': {
         preco: 299,
         parcelas: 24.92,
-        imagem: '../images/100ml.jpeg'
+        imagem: '../images/amadocodyM.jpeg'
       }
     };
 
+    // Função para atualizar o preço
+    function atualizarPreco(variacao) {
+      const precoElement = document.getElementById('precoAtual');
+      const parcelasElement = document.getElementById('parcelasAtual');
+      
+      if (variacoes[variacao]) {
+        const preco = variacoes[variacao].preco;
+        const parcelas = variacoes[variacao].parcelas;
+        
+        precoElement.textContent = `R$ ${preco}`;
+        const parcelasStr = parcelas.toFixed(2).replace('.', ',');
+        parcelasElement.textContent = `em 12x R$ ${parcelasStr} sem juros`;
+        
+        // Adiciona animação
+        precoElement.classList.add('atualizado');
+        setTimeout(() => {
+          precoElement.classList.remove('atualizado');
+        }, 500);
+        
+        // Atualiza variáveis globais
+        variacaoAtual = variacao;
+        precoAtual = preco;
+      }
+    }
+
+    // Função para selecionar variação de tamanho
+    function selecionarVariacao(elemento) {
+      // Remove seleção anterior
+      document.querySelectorAll('.cor-opcao').forEach(opcao => {
+        opcao.classList.remove('selecionado');
+      });
+      
+      // Adiciona seleção atual
+      elemento.classList.add('selecionado');
+      
+      // Atualiza preço
+      const variacao = elemento.dataset.variacao;
+      atualizarPreco(variacao);
+
+      // Atualiza imagem principal com a imagem da variação e remove active das miniaturas
+      const imagem = variacoes[variacao].imagem;
+      const galeriaPrincipal = document.querySelector('.galeria-principal');
+      galeriaPrincipal.innerHTML = `<img id="midiaAtual" src="${imagem}" alt="${variacao}" />`;
+      document.querySelectorAll('.miniatura, .miniatura-video').forEach(item => {
+        item.classList.remove('active');
+      });
+    }
+
+    // Função para alternar dropdown de quantidade
+    function toggleQuantidade() {
+      const dropdown = document.getElementById('quantidadeDropdown');
+      const button = document.querySelector('.quantidade-button');
+      
+      // Alterna visibilidade
+      dropdown.classList.toggle('show');
+      button.classList.toggle('active');
+    }
+
+    // Função para selecionar quantidade
+    function selecionarQuantidade(quantidade, texto) {
+      const spanQuantidade = document.getElementById('quantidadeSelecionada');
+      const dropdown = document.getElementById('quantidadeDropdown');
+      const button = document.querySelector('.quantidade-button');
+      const options = dropdown.querySelectorAll('.quantidade-option');
+      
+      // Atualiza o texto selecionado
+      spanQuantidade.textContent = texto;
+      
+      // Remove seleção anterior e adiciona nova
+      options.forEach(option => {
+        option.classList.remove('selected');
+        if (option.textContent === texto) {
+          option.classList.add('selected');
+        }
+      });
+      
+      // Fecha o dropdown
+      dropdown.classList.remove('show');
+      button.classList.remove('active');
+      
+      // Atualiza variável global
+      quantidadeAtual = quantidade;
+    }
+
+    // Função para trocar mídia na galeria
     function trocarMidia(elemento, tipo) {
       const galeriaPrincipal = document.querySelector('.galeria-principal');
       
@@ -884,27 +970,79 @@
       elemento.classList.add('active');
       
       if (tipo === 'imagem') {
-        // Se for imagem, substitui por img
+        // Para imagens
         const novaImagem = elemento.src;
         galeriaPrincipal.innerHTML = `<img id="midiaAtual" src="${novaImagem}" alt="Produto" />`;
       } else if (tipo === 'video') {
-        // Se for vídeo, substitui por video
+        // Para vídeos
         const videoSrc = elemento.getAttribute('data-video');
-        console.log('Tentando carregar vídeo:', videoSrc); // Debug
         galeriaPrincipal.innerHTML = `
           <video id="midiaAtual" controls muted preload="metadata" style="max-width: 100%; max-height: 100%;">
             <source src="${videoSrc}" type="video/mp4">
-            <source src="${videoSrc}" type="video/webm">
-            <source src="${videoSrc}" type="video/ogg">
             Seu navegador não suporta vídeos HTML5.
           </video>
         `;
         
-        // Adiciona evento para detectar erros de carregamento
+        // Tratamento de erro para vídeo
         const video = document.getElementById('midiaAtual');
         video.addEventListener('error', function(e) {
           console.error('Erro ao carregar vídeo:', e);
-          galeriaPrincipal.innerHTML = `<p>Erro ao carregar vídeo. Tente novamente mais tarde.</p>`;
+          galeriaPrincipal.innerHTML = `
+            <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #666; text-align: center;">
+              <p>Erro ao carregar vídeo.<br>Tente novamente mais tarde.</p>
+            </div>
+          `;
         });
       }
     }
+
+    // Função para produtos relacionados
+    function verProduto(produtoId) {
+      console.log('Visualizar produto:', produtoId);
+      // Aqui você implementaria a navegação para o produto
+    }
+
+    // Função para avaliar produto
+    function avaliarProduto() {
+      alert('Funcionalidade de avaliação será implementada em breve!');
+    }
+
+    // Event listeners para fechar dropdown ao clicar fora
+    document.addEventListener('click', function(event) {
+      const quantidadeSelector = document.querySelector('.quantidade-selector');
+      const dropdown = document.getElementById('quantidadeDropdown');
+      const button = document.querySelector('.quantidade-button');
+      
+      // Se o clique não foi dentro do seletor de quantidade
+      if (!quantidadeSelector.contains(event.target)) {
+        dropdown.classList.remove('show');
+        button.classList.remove('active');
+      }
+    });
+
+    // Inicialização quando a página carrega
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('Página carregada - JavaScript ativo');
+      
+      // Adiciona event listeners para as variações de tamanho
+      document.querySelectorAll('.cor-opcao').forEach(opcao => {
+        opcao.addEventListener('click', function() {
+          selecionarVariacao(this);
+        });
+      });
+      
+      // Verifica se os elementos existem
+      const precoElement = document.getElementById('precoAtual');
+      const quantidadeElement = document.getElementById('quantidadeSelecionada');
+      
+      if (precoElement) {
+        console.log('Preço inicial:', precoElement.textContent);
+      }
+      
+      if (quantidadeElement) {
+        console.log('Quantidade inicial:', quantidadeElement.textContent);
+      }
+    });
+  </script>
+</body>
+</html>
