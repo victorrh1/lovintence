@@ -407,9 +407,53 @@ body {
 .mobile-nav .category-item span {
     flex: 1;
     text-align: left;
+    white-space: nowrap;
 }
 
-/* Removendo setas */
+.sidebar .category-item span {
+    flex: 1;
+    text-align: left;
+    white-space: nowrap;
+}
+
+/* Subcategorias desktop */
+
+.sidebar .subcategory-list a {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-sm) var(--spacing-md);
+    color: var(--text-color);
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    transition: all 0.3s ease;
+    margin-bottom: var(--spacing-xs);
+    white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+    .main-container {
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        gap: var(--spacing-xl);
+        margin-top: var(--spacing-xl);
+    }
+}
+
+.sidebar .category-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-sm);
+    color: var(--text-color);
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    background: var(--light-gray);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    margin-bottom: var(--spacing-xs);
+}
+
+/* Remover setas */
 .has-subcategory .arrow {
     display: none;
 }

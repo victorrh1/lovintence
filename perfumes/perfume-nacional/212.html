@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Instinto</title>
+  <title>Dois um Dois</title>
   <link rel="icon" href="../images/iconeaba.ico" type="image/x-icon">
   <style>
     body {
@@ -151,12 +151,24 @@
     .preco {
       font-size: 36px;
       margin: 0 0 4px;
+      transition: all 0.3s ease;
+    }
+
+    .preco.atualizado {
+      animation: pulsePrice 0.5s ease-in-out;
+    }
+
+    @keyframes pulsePrice {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); color: #3483fa; }
+      100% { transform: scale(1); }
     }
 
     .parcelas {
       color: #00a650;
       font-size: 18px;
       margin-bottom: 16px;
+      transition: all 0.3s ease;
     }
 
     .frete {
@@ -182,9 +194,22 @@
     .cor-opcao {
       width: 36px;
       height: 36px;
-      border: 2px solid #3483fa;
+      border: 2px solid #ddd;
       border-radius: 4px;
       overflow: hidden;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .cor-opcao:hover {
+      border-color: #3483fa;
+      transform: scale(1.05);
+    }
+
+    .cor-opcao.selecionado {
+      border-color: #3483fa;
+      box-shadow: 0 0 0 2px rgba(52, 131, 250, 0.2);
     }
 
     .cor-opcao img {
@@ -193,6 +218,24 @@
       object-fit: cover;
     }
 
+    /* Indicador de seleção */
+    .cor-opcao.selecionado::after {
+      content: '✓';
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      background: #3483fa;
+      color: white;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: bold;
+    }
+    
     /* Seletor de Quantidade Estilo Mercado Livre */
     .estoque {
       margin-bottom: 24px;
@@ -561,11 +604,11 @@
 </head>
 <body>
   <div class="breadcrumb">
-    <a href="../perfume-masculino-i/geral.html">Voltar</a>
+    <a href="../perfume-feminino-i/geral.html">Voltar</a>
     <span class="separator">|</span>
     <a href="#">Importados</a>
     <span class="separator">></span>
-    <a href="#">Masculinos</a>
+    <a href="#">Feminino</a>
     <span class="separator">></span>
     <a href="#">Arabe</a>
   </div>
@@ -573,9 +616,9 @@
   <div class="produto-container">
     <div class="galeria">
       <div class="galeria-miniaturas">
-        <img src="../images/instintoM.png" class="miniatura active" onclick="trocarMidia(this, 'imagem')">
-        <img src="../images/instintoM.png" class="miniatura" onclick="trocarMidia(this, 'imagem')">
-        <img src="../images/instintoM.png" class="miniatura" onclick="trocarMidia(this, 'imagem')">
+        <img src="../images/doisumF.png" class="miniatura active" onclick="trocarMidia(this, 'imagem')">
+        <img src="../images/details.jpeg" class="miniatura" onclick="trocarMidia(this, 'imagem')">
+        
         <!-- Miniatura do vídeo -->
         <div class="miniatura-video" onclick="trocarMidia(this, 'video')" data-video="../videos/perfume-demo.mp4">
           <video muted preload="metadata">
@@ -584,29 +627,32 @@
         </div>
       </div>
       <div class="galeria-principal">
-        <img id="midiaAtual" src="../images/instintoM.png" alt="Produto" />
+        <img id="midiaAtual" src="../images/doisumF.png" alt="Produto" />
       </div>
     </div>
 
     <div class="detalhes">
       <span class="badge-recondicionado">Novo</span>
-      <h1 class="titulo">INSTINTO INSPIRAÇÃO PREMIUM</h1>
+      <h1 class="titulo">GRANDE GAROTA INSPIRAÇÃO PREMIUM</h1>
       
-      <div class="preco">R$ 299</div>
-      <div class="parcelas">em 12x R$ 24,92 sem juros</div> 
+      <div class="preco" id="precoAtual">R$ 229</div>
+      <div class="parcelas" id="parcelasAtual">em 12x R$ 19,08 sem juros</div> 
       
       <div class="frete">
         <span style="color: #00a650;">Chegará grátis</span> entre 14 e 20/ago
       </div>
 
       <div class="cor-selector">
-        <h3>Cor:</h3>
+        <h3>VARIAÇÃO:</h3>
         <div class="cor-opcoes">
-          <div class="cor-opcao">
-            <img src="../images/instintoM.png" alt="Opção 1">
-          </div>
+            <div class="cor-opcao selecionado" data-variacao="50ml" data-preco="229" data-imagem="../images/50ml.jpeg">
+                <img src="../images/50ml.jpeg" alt="50ml - R$ 229">
+            </div>
+            <div class="cor-opcao" data-variacao="100ml" data-preco="299" data-imagem="../images/100ml.jpeg">
+                <img src="../images/100ml.jpeg" alt="100ml - R$ 299">
+            </div>
         </div>
-      </div>
+    </div>
 
       <div class="estoque">
         <div class="estoque-info">Estoque disponível</div>
@@ -677,29 +723,29 @@
     <div class="secao">
       <h2>Descrição</h2>
       <div class="descricao-conteudo">
-        <p>Descubra a elegância e sofisticação do <strong>Perfume Importado Masculino Premium</strong>, uma fragrância única que combina notas marcantes e duradouras para o homem moderno.</p>
+        <p>Descubra a elegância e sofisticação do <strong>Perfume Importado Masculino Premium</strong>, Inspirado em uma fragrância oriental especiada sofisticada.</p>
         
         <h3>Características principais:</h3>
         <ul>
-          <li><strong>Fixação:</strong> 8 a 12 horas de duração</li>
-          <li><strong>Projeção:</strong> Moderada a forte</li>
-          <li><strong>Ocasião:</strong> Ideal para uso diário e ocasiões especiais</li>
-          <li><strong>Estação:</strong> Perfeito para todas as estações</li>
+          <li><strong>Fixação:</strong> 6 a 10 horas de duração</li>
+          <li><strong>Projeção:</strong> Moderada</li>
+          <li><strong>Ocasião:</strong> Uso noturno, jantares e eventos formais</li>
+          <li><strong>Estação:</strong> Outono e inverno</li>
         </ul>
 
         <h3>Pirâmide olfativa:</h3>
         <ul>
-          <li><strong>Notas de saída:</strong> Bergamota, limão siciliano e pimenta rosa</li>
-          <li><strong>Notas de coração:</strong> Lavanda, gerânio e noz-moscada</li>
-          <li><strong>Notas de fundo:</strong> Âmbar, sândalo e almíscar</li>
+          <li><strong>Notas de saída:</strong> Bergamota e limão</li>
+          <li><strong>Notas de coração:</strong> Anis estrelado, madeira de oliveira e guaiaco</li>
+          <li><strong>Notas de fundo:</strong> Fava tonka, tabaco e couro</li>
         </ul>
 
         <h3>Sobre o produto:</h3>
-        <p>Este perfume foi desenvolvido por perfumistas renomados, utilizando ingredientes de alta qualidade importados diretamente da França. Sua composição equilibrada oferece uma experiência olfativa única, proporcionando confiança e elegância a quem o usa.</p>
+        <p>Amado Code é a escolha ideal para homens elegantes e discretos. Um perfume refinado, com toques cítricos e especiados que se transformam em uma base quente e sedutora.</p>
 
-        <p><strong>Conteúdo:</strong> 100ml</p>
+        <p><strong>Conteúdo:</strong> 50ml e 100ml</p>
         <p><strong>Concentração:</strong> Eau de Parfum</p>
-        <p><strong>Origem:</strong> Importado</p>
+        <p><strong>Origem:</strong> Essência importada</p>
       </div>
     </div>
 
@@ -776,11 +822,11 @@
             <span class="estrela">★</span>
             <span class="estrela">★</span>
             <span class="estrela">★</span>
-            <span class="estrela">★</span>
+            <span class="estrela vazia">★</span>
             <span class="estrela vazia">★</span>
           </div>
           <div class="feedback-texto">
-            Muito bom perfume, cheiro agradável e boa fixação. Único ponto é que poderia ter chegado um pouco mais rápido, mas no geral estou satisfeito.
+            Fixação boa, mas esperava um pouco mais de intensidade. O cheiro é agradável, mas não é tão marcante quanto eu imaginava.
           </div>
         </div>
 
@@ -808,8 +854,110 @@
   </div>
 
   <script>
+    // Variáveis globais
     let quantidadeAtual = 1;
+    let variacaoAtual = '50ml';
+    let precoAtual = 229;
 
+    // Dados das variações
+    const variacoes = {
+      '50ml': {
+        preco: 229,
+        parcelas: 19.08,
+        imagem: '../images/doisumF.png'
+      },
+      '100ml': {
+        preco: 299,
+        parcelas: 24.92,
+        imagem: '../images/doisumF.png'
+      }
+    };
+
+    // Função para atualizar o preço
+    function atualizarPreco(variacao) {
+      const precoElement = document.getElementById('precoAtual');
+      const parcelasElement = document.getElementById('parcelasAtual');
+      
+      if (variacoes[variacao]) {
+        const preco = variacoes[variacao].preco;
+        const parcelas = variacoes[variacao].parcelas;
+        
+        precoElement.textContent = `R$ ${preco}`;
+        const parcelasStr = parcelas.toFixed(2).replace('.', ',');
+        parcelasElement.textContent = `em 12x R$ ${parcelasStr} sem juros`;
+        
+        // Adiciona animação
+        precoElement.classList.add('atualizado');
+        setTimeout(() => {
+          precoElement.classList.remove('atualizado');
+        }, 500);
+        
+        // Atualiza variáveis globais
+        variacaoAtual = variacao;
+        precoAtual = preco;
+      }
+    }
+
+    // Função para selecionar variação de tamanho
+    function selecionarVariacao(elemento) {
+      // Remove seleção anterior
+      document.querySelectorAll('.cor-opcao').forEach(opcao => {
+        opcao.classList.remove('selecionado');
+      });
+      
+      // Adiciona seleção atual
+      elemento.classList.add('selecionado');
+      
+      // Atualiza preço
+      const variacao = elemento.dataset.variacao;
+      atualizarPreco(variacao);
+
+      // Atualiza imagem principal com a imagem da variação e remove active das miniaturas
+      const imagem = variacoes[variacao].imagem;
+      const galeriaPrincipal = document.querySelector('.galeria-principal');
+      galeriaPrincipal.innerHTML = `<img id="midiaAtual" src="${imagem}" alt="${variacao}" />`;
+      document.querySelectorAll('.miniatura, .miniatura-video').forEach(item => {
+        item.classList.remove('active');
+      });
+    }
+
+    // Função para alternar dropdown de quantidade
+    function toggleQuantidade() {
+      const dropdown = document.getElementById('quantidadeDropdown');
+      const button = document.querySelector('.quantidade-button');
+      
+      // Alterna visibilidade
+      dropdown.classList.toggle('show');
+      button.classList.toggle('active');
+    }
+
+    // Função para selecionar quantidade
+    function selecionarQuantidade(quantidade, texto) {
+      const spanQuantidade = document.getElementById('quantidadeSelecionada');
+      const dropdown = document.getElementById('quantidadeDropdown');
+      const button = document.querySelector('.quantidade-button');
+      const options = dropdown.querySelectorAll('.quantidade-option');
+      
+      // Atualiza o texto selecionado
+      spanQuantidade.textContent = texto;
+      
+      // Remove seleção anterior e adiciona nova
+      options.forEach(option => {
+        option.classList.remove('selected');
+        if (option.textContent === texto) {
+          option.classList.add('selected');
+        }
+      });
+      
+      // Fecha o dropdown
+      dropdown.classList.remove('show');
+      button.classList.remove('active');
+      
+      // Atualiza variável global
+      quantidadeAtual = quantidade;
+    }
+
+    // Função para trocar mídia na galeria
     function trocarMidia(elemento, tipo) {
       const galeriaPrincipal = document.querySelector('.galeria-principal');
       
@@ -822,81 +970,79 @@
       elemento.classList.add('active');
       
       if (tipo === 'imagem') {
-        // Se for imagem, substitui por img
+        // Para imagens
         const novaImagem = elemento.src;
         galeriaPrincipal.innerHTML = `<img id="midiaAtual" src="${novaImagem}" alt="Produto" />`;
       } else if (tipo === 'video') {
-        // Se for vídeo, substitui por video
+        // Para vídeos
         const videoSrc = elemento.getAttribute('data-video');
-        console.log('Tentando carregar vídeo:', videoSrc); // Debug
         galeriaPrincipal.innerHTML = `
           <video id="midiaAtual" controls muted preload="metadata" style="max-width: 100%; max-height: 100%;">
             <source src="${videoSrc}" type="video/mp4">
-            <source src="${videoSrc}" type="video/webm">
-            <source src="${videoSrc}" type="video/ogg">
             Seu navegador não suporta vídeos HTML5.
           </video>
         `;
         
-        // Adiciona evento para detectar erros de carregamento
+        // Tratamento de erro para vídeo
         const video = document.getElementById('midiaAtual');
         video.addEventListener('error', function(e) {
           console.error('Erro ao carregar vídeo:', e);
-          console.error('Caminho do vídeo:', videoSrc);
-        });
-        
-        video.addEventListener('loadeddata', function() {
-          console.log('Vídeo carregado com sucesso!');
+          galeriaPrincipal.innerHTML = `
+            <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #666; text-align: center;">
+              <p>Erro ao carregar vídeo.<br>Tente novamente mais tarde.</p>
+            </div>
+          `;
         });
       }
     }
 
-    function toggleQuantidade() {
+    // Função para produtos relacionados
+    function verProduto(produtoId) {
+      console.log('Visualizar produto:', produtoId);
+      // Aqui você implementaria a navegação para o produto
+    }
+
+    // Função para avaliar produto
+    function avaliarProduto() {
+      alert('Funcionalidade de avaliação será implementada em breve!');
+    }
+
+    // Event listeners para fechar dropdown ao clicar fora
+    document.addEventListener('click', function(event) {
+      const quantidadeSelector = document.querySelector('.quantidade-selector');
       const dropdown = document.getElementById('quantidadeDropdown');
       const button = document.querySelector('.quantidade-button');
       
-      dropdown.classList.toggle('show');
-      button.classList.toggle('active');
-    }
-
-    function selecionarQuantidade(quantidade, texto) {
-      quantidadeAtual = quantidade;
-      
-      // Atualiza o texto do botão
-      document.getElementById('quantidadeSelecionada').textContent = texto;
-      
-      // Remove seleção de todas as opções
-      document.querySelectorAll('.quantidade-option').forEach(option => {
-        option.classList.remove('selected');
-      });
-      
-      // Adiciona seleção à opção clicada
-      event.target.classList.add('selected');
-      
-      // Fecha o dropdown
-      document.getElementById('quantidadeDropdown').classList.remove('show');
-      document.querySelector('.quantidade-button').classList.remove('active');
-    }
-
-    // Fecha o dropdown se clicar fora dele
-    document.addEventListener('click', function(event) {
-      const selector = document.querySelector('.quantidade-selector');
-      if (!selector.contains(event.target)) {
-        document.getElementById('quantidadeDropdown').classList.remove('show');
-        document.querySelector('.quantidade-button').classList.remove('active');
+      // Se o clique não foi dentro do seletor de quantidade
+      if (!quantidadeSelector.contains(event.target)) {
+        dropdown.classList.remove('show');
+        button.classList.remove('active');
       }
     });
 
-    function verProduto(produtoId) {
-      // Aqui você pode adicionar a lógica para navegar para o produto
-      console.log('Visualizar produto:', produtoId);
-      // Exemplo: window.location.href = `produto-${produtoId}.html`;
-    }
-
-    function avaliarProduto() {
-      // Aqui você pode adicionar a lógica para abrir um modal de avaliação
-      alert('Funcionalidade de avaliação');
-    }
+    // Inicialização quando a página carrega
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('Página carregada - JavaScript ativo');
+      
+      // Adiciona event listeners para as variações de tamanho
+      document.querySelectorAll('.cor-opcao').forEach(opcao => {
+        opcao.addEventListener('click', function() {
+          selecionarVariacao(this);
+        });
+      });
+      
+      // Verifica se os elementos existem
+      const precoElement = document.getElementById('precoAtual');
+      const quantidadeElement = document.getElementById('quantidadeSelecionada');
+      
+      if (precoElement) {
+        console.log('Preço inicial:', precoElement.textContent);
+      }
+      
+      if (quantidadeElement) {
+        console.log('Quantidade inicial:', quantidadeElement.textContent);
+      }
+    });
   </script>
 </body>
 </html>
